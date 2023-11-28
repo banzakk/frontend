@@ -1,5 +1,9 @@
-import StyledComponentsRegistry from "@/libs/registry";
-import "@/styles/globals.scss";
+import { Metadata } from 'next'
+import '@/styles/globals.scss'
+
+export const metadata: Metadata = {
+  title: 'Banzakk',
+}
 
 export default function RootLayout({
   children,
@@ -9,8 +13,8 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        {children}
       </body>
     </html>
-  );
+  )
 }
