@@ -1,0 +1,61 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import './colors';
+
+@layer base {
+  :root {
+    --background: #{$white};
+    --foreground: #{$foreground};
+    --card: #{$white};
+    --card-foreground: #{$foreground};
+    --popover: #{$white};
+    --popover-foreground: #{$foreground};
+    --primary: #{$primary};
+    --primary-foreground: #{$primary-foreground};
+    --secondary: #{$secondary};
+    --secondary-foreground: #{$secondary-foreground};
+    --muted: #{$secondary};
+    --muted-foreground: #{$muted-foreground};
+    --accent: #{$secondary};
+    --accent-foreground: #{$secondary-foreground};
+    --destructive: #{$danger};
+    --destructive-foreground: #{$primary-foreground};
+    --border: #{$border};
+    --input: #{$border};
+    --ring: #{$primary};
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: #{$foreground};
+    --foreground: #{$primary-foreground};
+    --card: #{$foreground};
+    --card-foreground: #{$primary-foreground};
+    --popover: #{$foreground};
+    --popover-foreground: #{$primary-foreground};
+    --primary: #{$primary};
+    --primary-foreground: #{$secondary-foreground};
+    --secondary: #{$secondary-foreground};
+    --secondary-foreground: #{$primary-foreground};
+    --muted: #{$secondary-foreground};
+    --muted-foreground: #{$dark-muted-foreground};
+    --accent: #{$secondary-foreground};
+    --accent-foreground: #{$primary-foreground};
+    --destructive: #{$danger};
+    --destructive-foreground: #{$primary-foreground};
+    --border: #{$secondary-foreground};
+    --input: #{$secondary-foreground};
+    --ring: #{$primary};
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+}
