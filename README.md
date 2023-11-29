@@ -32,5 +32,5 @@
 | --- | --- |
 | _colors.scss | 공통 색상 변수 |
 | _mixins.scss | 재사용할 scss 선언 그룹 |
-| _variables.scss | 색상을 제외한 공통 변수 (ex 폰트 크기)  |
+| _variables.scss | 색상을 제외한 공통 변수 (ex: size)  |
 | _globals.scss | 공통 scss (app/layout.tsx에 적용)|
