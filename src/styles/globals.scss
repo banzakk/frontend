@@ -39,7 +39,7 @@
     --secondary: #{$secondary-foreground};
     --secondary-foreground: #{$primary-foreground};
     --muted: #{$secondary-foreground};
-    --muted-foreground: #{$muted-foreground};
+    --muted-foreground: #{$dark-muted-foreground};
     --accent: #{$secondary-foreground};
     --accent-foreground: #{$primary-foreground};
     --destructive: #{$danger};
