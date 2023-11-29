@@ -3,6 +3,7 @@ import '@/styles/globals.scss'
 
 export const metadata: Metadata = {
   title: 'Banzakk',
+  icons: { icon: 'http://localhost:3000/favicon.ico' },
 }
 
 export default function RootLayout({
@@ -12,9 +13,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
-        {children}
-      </body>
+      <head>
+        <link
+          rel="icon"
+          href="/icon?<generated>"
+          type="image/<generated>"
+          sizes="<generated>"
+        />
+      </head>
+      <body>{children}</body>
     </html>
   )
 }
