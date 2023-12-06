@@ -6,46 +6,48 @@
 @layer base {
   :root {
     --background: #{$white};
-    --foreground: #{$foreground};
+    --third: #{$third};
+    --ghost: #{$gray-strong};
+    --foreground: #{$black};
     --card: #{$white};
-    --card-foreground: #{$foreground};
+    --card-foreground: #{$black};
     --popover: #{$white};
-    --popover-foreground: #{$foreground};
+    --popover-foreground: #{$black};
     --primary: #{$primary};
-    --primary-foreground: #{$primary-foreground};
+    --primary-foreground: #{$white};
     --secondary: #{$secondary};
-    --secondary-foreground: #{$secondary-foreground};
+    --secondary-foreground:#{$white};
     --muted: #{$secondary};
     --muted-foreground: #{$muted-foreground};
-    --accent: #{$secondary};
-    --accent-foreground: #{$secondary-foreground};
+    --accent: #{$gray-strong};
+    --accent-foreground: #{$white};
     --destructive: #{$danger};
-    --destructive-foreground: #{$primary-foreground};
-    --border: #{$border};
-    --input: #{$border};
+    --destructive-foreground: #{$danger};
+    --border: #{$primary};
+    --input: #{$primary};
     --ring: #{$primary};
-    --radius: 0.5rem;
+    --radius: 1.5rem;
   }
 
   .dark {
-    --background: #{$foreground};
-    --foreground: #{$primary-foreground};
-    --card: #{$foreground};
-    --card-foreground: #{$primary-foreground};
-    --popover: #{$foreground};
-    --popover-foreground: #{$primary-foreground};
+    --background: #{$black};
+    --foreground: #{$white};
+    --card: #{$black};
+    --card-foreground: #{$white};
+    --popover: #{$black};
+    --popover-foreground: #{$white};
     --primary: #{$primary};
-    --primary-foreground: #{$secondary-foreground};
-    --secondary: #{$secondary-foreground};
-    --secondary-foreground: #{$primary-foreground};
-    --muted: #{$secondary-foreground};
+    --primary-foreground: #{$white};
+    --secondary:#{$white};
+    --secondary-foreground: #{$white};
+    --muted:#{$white};
     --muted-foreground: #{$dark-muted-foreground};
-    --accent: #{$secondary-foreground};
-    --accent-foreground: #{$primary-foreground};
-    --destructive: #{$danger};
-    --destructive-foreground: #{$primary-foreground};
-    --border: #{$secondary-foreground};
-    --input: #{$secondary-foreground};
+    --accent:#{$white};
+    --accent-foreground: #{$white};
+    --destructive: #{$dark-destructive};
+    --destructive-foreground: #{$danger};
+    --border: #{$primary};
+    --input:#{$white};
     --ring: #{$primary};
   }
 }
@@ -58,4 +60,8 @@
     @apply bg-background text-foreground;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
+}
+
+* {
+  line-height: 1;
 }
