@@ -1,0 +1,58 @@
+@import '@/styles/colors';
+@import '@/styles/mixins';
+
+.fontSize14 {
+  font-size: pxToRem(14);
+}
+
+.fontSize16 {
+  font-size: pxToRem(16);
+}
+
+.fontSize18 {
+  font-size: pxToRem(18);
+}
+
+.fontSize24 {
+  font-size: pxToRem(24);
+}
+
+.black {
+  color: $black;
+}
+
+.red {
+  color: $danger;
+}
+
+.white {
+  color: $white;
+}
+
+.primary {
+  color: $primary;
+}
+
+.grayStrong {
+  color: $gray-strong;
+}
+
+.grayNormal {
+  color: $gray-normal;
+}
+
+.grayLight {
+  color: $gray-light;
+}
+
+.fontWeight800 {
+  font-weight: 800;
+}
+
+.fontWeight600 {
+  font-weight: 600;
+}
+
+.fontWeight400 {
+  font-weight: 400;
+}
