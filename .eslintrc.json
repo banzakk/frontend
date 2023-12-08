@@ -1,5 +1,5 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  "extends": ["next/core-web-vitals", "plugin:prettier/recommended", "plugin:@tanstack/eslint-plugin-query/recommended"],
   "rules": {
     "no-var": "warn", // var 금지
     "no-multiple-empty-lines": "warn", // 여러 줄 공백 금지
@@ -24,5 +24,5 @@
       }
     ]
   },
-  "plugins": ["react", "@typescript-eslint"]
+  "plugins": ["react", "@typescript-eslint", "@tanstack/query"]
 }
