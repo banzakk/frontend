@@ -1,4 +1,6 @@
 import { Metadata } from 'next'
+import Providers from '@/states/server/Providers'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import '@/styles/globals.scss'
 
 export const metadata: Metadata = {
@@ -21,7 +23,12 @@ export default function RootLayout({
           sizes="<generated>"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Providers>
+          {children}
+          <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
+        </Providers>
+      </body>
     </html>
   )
 }
