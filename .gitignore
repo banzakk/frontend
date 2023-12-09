@@ -39,3 +39,7 @@ next-env.d.ts
 # vscode
 settings.json
 tailwind.json
+
+# cert
+localhost.crt
+localhost.key
