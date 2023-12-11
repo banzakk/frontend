@@ -16,7 +16,7 @@
     --primary: #{$primary};
     --primary-foreground: #{$white};
     --secondary: #{$secondary};
-    --secondary-foreground:#{$white};
+    --secondary-foreground: #{$white};
     --muted: #{$secondary};
     --muted-foreground: #{$muted-foreground};
     --accent: #{$gray-strong};
@@ -38,16 +38,16 @@
     --popover-foreground: #{$white};
     --primary: #{$primary};
     --primary-foreground: #{$white};
-    --secondary:#{$white};
+    --secondary: #{$white};
     --secondary-foreground: #{$white};
-    --muted:#{$white};
+    --muted: #{$white};
     --muted-foreground: #{$dark-muted-foreground};
-    --accent:#{$white};
+    --accent: #{$white};
     --accent-foreground: #{$white};
     --destructive: #{$dark-destructive};
     --destructive-foreground: #{$danger};
     --border: #{$primary};
-    --input:#{$white};
+    --input: #{$white};
     --ring: #{$primary};
   }
 }
@@ -55,6 +55,7 @@
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
   body {
     @apply bg-background text-foreground;
