@@ -1,0 +1,26 @@
+@import '@/styles/colors';
+@import '@/styles/mixins';
+
+.formFieldContainer {
+  display: flex;
+  width: 100%;
+  gap: 0 pxToRem(22);
+}
+
+.inputContainer {
+  &:first-child,
+  &:nth-child(2) {
+    margin-top: 0;
+  }
+  margin-top: pxToRem(24);
+  flex: 1;
+}
+.underline {
+  color: $gray-strong;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  padding: pxToRem(8) 0;
+  font-weight: 400;
+}
