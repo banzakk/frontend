@@ -18,8 +18,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode
+  modal: React.ReactNode
 }) {
   return (
     <html lang="ko">
@@ -57,10 +59,13 @@ export default function RootLayout({
                 </div>
               </section>
             </header>
-            <div className={cn.mainSectionWrapper}>{children}</div>
+            <div className={cn.mainSectionWrapper}>
+            {children}
+            </div>
             <div className={cn.rightSectionWrapper}>
               <div className={cn.fixedWrapper}>search Area</div>
             </div>
+            {modal}
           </div>
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </Providers>
