@@ -1,51 +1,55 @@
 @import '@/styles/colors';
-@import '@/styles/mixins';
 
 .container {
-  // border: 1px solid blue;
-  width: 500px;
-  padding: 16px;
-  margin: 16px 0;
   min-height: 488px;
+  margin: 16px 0;
+  padding: 16px;
 }
 
 .imageArea {
-  background-color: $secondary;
-  border-radius: 30px;
-  margin-bottom: 16px;
   width: 468px;
   height: 350px;
+  margin-bottom: 16px;
+  border-radius: 30px;
+  background-color: $secondary;
 }
 
 .image {
   display: block;
-  border-radius: 30px;
-  object-fit: cover;
   width: 100%;
   height: 100%;
+  border-radius: 30px;
+  object-fit: cover;
 }
 
-.contentArea {
+.actionContainer {
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 15px;
+}
+
+.contentContainer {
+  display: flex;
+  width: 500px;
   padding: 5px;
-  width: 100%;
+}
+
+.nickNameArea {
+  width: 70px;
+  margin-right: 20px;
 }
 
 .nickName {
-  margin: 0 10px;
-  white-space: nowrap;
+  width: 100%;
+  word-wrap: break-word;
 }
 
-.commentArea {
-  display: flex;
-  align-items: center;
-  margin-left: 28px;
-  padding: 10px 0;
+.contentArea {
+  width: 100%;
 }
 
-
-.profile {
-  border-radius: 50%;
-  object-fit: cover;
-  height: 30px;
+.icon {
+  margin-right: 5px;
 }

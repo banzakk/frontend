@@ -1,0 +1,37 @@
+.commentArea {
+  display: flex;
+  align-items: flex-start;
+  max-width: 450px;
+  padding: 10px 0;
+  margin-left: 15px;
+}
+
+.nickNameArea {
+  display: flex;
+  align-items: center;
+}
+
+.nickName {
+  width: 60px;
+  margin: 0 6px;
+  word-wrap: break-word;
+}
+
+.profile {
+  width: 20px;
+  height: 20px;
+}
+
+.contentArea {
+  width: 100%;
+}
+
+.actionContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.icon {
+  margin-right: 5px;
+}

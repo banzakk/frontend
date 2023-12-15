@@ -1,48 +1,53 @@
 'use client'
 
-import Image from 'next/image'
 import cn from './Whisper.module.scss'
-import Typography from '@/components/atom/Typography/Typography'
 import { Button } from '@/components/ui/button'
+import Typography from '@/components/atom/Typography/Typography'
+import LikeIcon from '@/components/atom/svg/LikeIcon'
+import RepostIcon from '@/components/atom/svg/RepostIcon'
+import ShareIcon from '@/components/atom/svg/ShareIcon'
+import Comment from '@/components/molecule/Comment/Comment'
+import { Whisper as WhisperType } from '@/types/whisper'
 
+export default function Whisper(whisper: WhisperType) {
+  const { nickname, imgUrl, content, comments } = whisper
 
-export default function Whisper() {
   return (
     <div className={cn.container}>
       <div className={cn.imageArea}>
-        <Image
-          src="/images/hamster.jpg"
+        <img
+          src={imgUrl}
           alt="whisperImages"
           className={cn.image}
-          priority
           width={468}
           height={350}
         />
       </div>
-      <div className={cn.contentArea}>
-        <Typography weight="800" className={cn.nickName}>
-          nickname
-        </Typography>
-        <Typography>
-          content
-        </Typography>
+      <div className={cn.actionContainer}>
+        <LikeIcon isFilled={false} className={cn.icon} />
+        <RepostIcon className={cn.icon} />
+        <ShareIcon />
       </div>
-      <div className={cn.commentArea}>
-        <Image
-          src="/images/hamster.jpg"
-          alt="userProfile"
-          width={30}
-          height={30}
-          className={cn.profile}
-        />
-        <Typography weight="800" className={cn.nickName}>
-          박찌
-        </Typography>
-        <Typography>무슨색인가요</Typography>
+      <div className={cn.contentContainer}>
+        <div className={cn.nickNameArea}>
+          <Typography size="14" type="div" weight="800" className={cn.nickName}>
+            {nickname}
+          </Typography>
+        </div>
+        <div className={cn.contentArea}>
+          <Typography size="14">{content}</Typography>
+        </div>
       </div>
-      <Button variant="link" className="text-primary">
-        댓글 999개 더 보기...
-      </Button>
+      {comments && comments.length > 0 && (
+        <div>
+          {comments.map((comment) => (
+            <Comment key={comment.commentId} {...comment} />
+          ))}
+          <Button variant="link" className="text-primary">
+            댓글 더 불러오기
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
