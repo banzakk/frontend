@@ -1,19 +1,94 @@
 'use client'
 
+import {
+  ChangeEventHandler,
+  FormEvent,
+  MouseEventHandler,
+  useState,
+} from 'react'
+import axios from 'axios'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
+import TextareaAutosize from 'react-textarea-autosize'
+import UploadImg from '../UploadImg/UploadImg'
+import CloseIcon from '@/components/atom/svg/CloseIcon'
 import { Button } from '@/components/ui/button'
 import cn from './Post.module.scss'
-import { ChangeEventHandler, FormEventHandler, useState } from 'react'
-import UploadImg from '../UploadImg/UploadImg'
-import TextareaAutosize from 'react-textarea-autosize'
 
 const Post = () => {
   const [content, setContent] = useState('')
+  const [hashArr, setHashArr] = useState<string[]>([])
   const [preview, setPreview] = useState<string[]>([])
-  const [imageUrl, setImageUrl] = useState('')
+  const [files, setFiles] = useState<File[]>([])
+  const router = useRouter()
+  const api = process.env.NEXT_PUBLIC_SERVER_URL || ''
+
+  const mutation = useMutation({
+    mutationFn: async (data: FormData) => {
+      return await axios.post(api, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+    },
+    onSuccess(response) {
+      if (response) {
+        alert('업로드성공')
+      }
+    },
+    onError(error) {
+      console.error(error)
+      alert('업로드 오류가 발생했습니다.')
+    },
+  })
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    if (content.length === 0 && files.length === 0) {
+      alert('내용을 입력해주세요.')
+      return
+    }
+    const formData = new FormData()
+    formData.append('content', content)
+    for (let i = 0; i < files.length; i++) {
+      formData.append('image', files[i])
+    }
+    for (let i = 0; i < hashArr.length; i++) {
+      formData.append('hashTag', hashArr[i])
+    }
+    mutation.mutate(formData)
+  }
+
+  // 글쓰기 창 닫기
+  const handleClose: MouseEventHandler<HTMLButtonElement | HTMLDivElement> = (
+    e
+  ) => {
+    if (confirm('취소하시겠습니까?')) {
+      router.back()
+    } else {
+      return
+    }
+  }
+
+  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+  }
 
   // 텍스트 내용
   const handleContent: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    setContent(e.target.value)
+    const contentValue = e.target.value
+    const lines = contentValue.split('\n')
+    const hashtags = contentValue.match(/#[\p{L}_0-9]+/gu)
+
+    if (
+      lines.length > 20 ||
+      contentValue.length > 200 ||
+      (hashtags && hashtags.some((tag) => tag.length > 11))
+    ) {
+      return
+    }
+    setContent(contentValue)
+    setHashArr(hashtags || [])
   }
 
   // 이미지 파일첨부
@@ -29,6 +104,7 @@ const Post = () => {
       }
 
       let previewURLs: string[] = []
+      let newFiles: File[] = []
 
       for (let i = 0; i < fileArray.length; i++) {
         const reader = new FileReader()
@@ -37,96 +113,91 @@ const Post = () => {
           setPreview([...previewURLs])
         }
         reader.readAsDataURL(fileArray[i])
+        newFiles.push(fileArray[i])
       }
+      setFiles(newFiles)
     }
   }
 
-
-  // 게시글 등록
-  // const handleSubmit: FormEventHandler = async (e) => {
-  //   try {
-  //     e.preventDefault()
-
-  //     if (!content) {
-  //       alert('내용을 입력해 주세요')
-  //       return
-  //     }
-
-  //     const formData = new FormData()
-  //     formData.append('content', content)
-  //     formData.append('images', files)
-
-  //     const response = await fetch('api주소', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //       body: formData
-  //     })
-
-  //     const data = await response.json()
-
-  //     if (data.message === 'Whisper creation successful') {
-  //       setImageUrl(data.data.profileImage)
-  //     } else {
-  //       console.error('upload error!')
-  //     }
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
+  // 이미지 미리보기 삭제
+  const removePreview = (index: number) => {
+    setPreview((prev) => {
+      const newPreview = prev.filter((_, i) => i !== index)
+      return newPreview
+    })
+    setFiles((prev) => {
+      const newFiles = prev.filter((_, i) => i !== index)
+      return newFiles
+    })
+  }
 
   return (
-    <form
-      className={cn.form}
-      // onSubmit={handleSubmit}
-      encType="multipart/form-data"
-    >
-      <div className={cn.container}>
-        <TextareaAutosize
-          cacheMeasurements
-          minRows={5}
-          maxRows={15}
-          className={cn.textArea}
-          onChange={handleContent}
-          value={content}
-        />
-
-        {preview.length > 0 && (
-          <div className={cn.previewContainer}>
-            {preview.map((url, index) => (
-              <div
-                key={index}
-                className={cn.imageArea}
-              >
-                <img
-                  src={url}
-                  alt={`preview${index}`}
-                  className={cn.previewImg}
-                />
+    <>
+      <div className={cn.modalBackground} onClick={handleClose}>
+        <div className={cn.postArea} onClick={handleModalClick}>
+          <form
+            className={cn.form}
+            onSubmit={handleSubmit}
+            encType="multipart/form-data"
+          >
+            <div className={cn.container}>
+              <div className={cn.closeBtn}>
+                <button onClick={handleClose} type="button">
+                  <CloseIcon />
+                </button>
               </div>
-            ))}
-          </div>
-        )}
 
-        <div className={cn.btnArea}>
-          <label htmlFor="file" className={cn.fileIcon}>
-            <UploadImg size="24" color="#c29dff" />
-          </label>
-          <input
-            type="file"
-            id="file"
-            accept="image/*"
-            multiple
-            className={cn.fileInput}
-            onChange={handleImages}
-          />
-          <Button className={cn.btn} type="submit">
-            글쓰기
-          </Button>
+              <TextareaAutosize
+                cacheMeasurements
+                minRows={5}
+                maxRows={15}
+                className={cn.textArea}
+                onChange={handleContent}
+                value={content}
+              />
+
+              {preview.length > 0 && (
+                <div className={cn.previewContainer}>
+                  {preview.map((url, index) => (
+                    <div key={index} className={cn.imageArea}>
+                      <button
+                        onClick={() => removePreview(index)}
+                        className={cn.previewClose}
+                        type="button"
+                      >
+                        <CloseIcon size="16" className={cn.previewClose} />
+                      </button>
+                      <img
+                        src={url}
+                        alt={`preview${index}`}
+                        className={cn.previewImg}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className={cn.btnArea}>
+                <label htmlFor="file" className={cn.fileIcon}>
+                  <UploadImg size="24" color="#c29dff" />
+                </label>
+                <input
+                  type="file"
+                  id="file"
+                  accept="image/*"
+                  multiple
+                  className={cn.fileInput}
+                  onChange={handleImages}
+                />
+                <Button className={cn.btn} type="submit">
+                  글쓰기
+                </Button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-    </form>
+    </>
   )
 }
 

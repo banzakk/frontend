@@ -4,11 +4,7 @@ interface IconProps {
   className?: string
 }
 
-const UploadImg: React.FC<IconProps> = ({
-  size,
-  color,
-  className,
-}) => {
+const UploadImg: React.FC<IconProps> = ({ size, color, className }) => {
   return (
     <svg
       width={size}
