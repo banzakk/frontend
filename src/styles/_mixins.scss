@@ -1,4 +1,10 @@
 // px단위 rem으로 변환하는 함수 (px, base font-size)
 @function pxToRem($px, $base: 16) {
-  @return ($px / $base)+rem
+  @return ($px / $base) + rem;
+}
+
+@mixin container($max-width: 1240px) {
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
 }
