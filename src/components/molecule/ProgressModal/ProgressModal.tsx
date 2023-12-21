@@ -72,7 +72,7 @@ const Agreement = ({
         />
         내용을 확인하였으며 정보 제공에 동의합니다.
       </div>
-      <Button disabled={!active}>
+      <Button size="full" disabled={!active}>
         <Link href="/">완료</Link>
       </Button>
     </>
