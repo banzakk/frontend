@@ -12,17 +12,22 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { postEmailCheck, postIdCheck, postSignUp } from '@/services/signup'
-import { UserDto } from '@/types'
+import { ProgressStatus, UserDto } from '@/types'
 import { FormErrorBuilder } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import clsx from 'clsx'
+import { SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import cn from './SignUpForm.module.scss'
 import { formSchema, nonKoreanStringSchema } from './signUpFormSchema'
 
-export function SignUpForm() {
+export function SignUpForm({
+  setProgress,
+}: {
+  setProgress: React.Dispatch<SetStateAction<ProgressStatus>>
+}) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onBlur',
@@ -40,9 +45,12 @@ export function SignUpForm() {
       const { email, password, userCustomId, name } = data
       const formData = { email, password, userCustomId, name }
       await postSignUp(formData)
+      setProgress('agreement')
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        alert('일시적인 오류가 발생했습니다. 잠시 후에 다시 시도해주세요.')
+        if (err.response?.status === 400) {
+          alert(err.response?.data.message)
+        }
       }
     }
   }

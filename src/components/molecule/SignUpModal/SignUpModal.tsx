@@ -1,17 +1,10 @@
 'use client'
 
-import Typography from '@/components/atom/Typography/Typography'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogOverlay,
-} from '@/components/ui/dialog'
-import { useEffect, useState } from 'react'
-import { SignUpForm } from '../SignUpForm/SignUpForm'
+import { Dialog, DialogContent, DialogOverlay } from '@/components/ui/dialog'
+import { ReactNode, useEffect, useState } from 'react'
 import cn from './SignUpModal.module.scss'
 
-export function SignUpModal() {
+export function SignUpModal({ children }: { children: ReactNode }) {
   useEffect(() => {
     setActive(true)
   }, [])
@@ -21,13 +14,7 @@ export function SignUpModal() {
     <Dialog open={active}>
       <DialogOverlay>
         <DialogContent className={cn.content} isUseXButton={false}>
-          <DialogHeader className={cn.header}>
-            <Typography type="h2" weight="600" size="24">
-              회원가입을 위해 <br />
-              정보를 입력해주세요.
-            </Typography>
-          </DialogHeader>
-          <SignUpForm />
+          {children}
         </DialogContent>
       </DialogOverlay>
     </Dialog>

@@ -1,0 +1,23 @@
+@import '@/styles/mixins';
+@import '@/styles/colors';
+.header {
+  margin-bottom: pxToRem(48);
+  line-height: normal;
+}
+.description {
+  line-height: normal;
+}
+.link {
+  color: $primary;
+  text-decoration-line: underline;
+  font-weight: 600;
+}
+.checkWrap {
+  display: flex;
+  align-items: center;
+  font-size: pxToRem(12);
+  color: $gray-strong;
+  gap: pxToRem(8);
+  font-weight: 400;
+  margin: pxToRem(40) 0;
+}
