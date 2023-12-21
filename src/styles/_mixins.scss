@@ -3,7 +3,7 @@
   @return ($px / $base) + rem;
 }
 
-@mixin container($max-width: 1240px) {
+@mixin container($max-width: 1280px) {
   max-width: $max-width;
   width: 100%;
   margin: 0 auto;
