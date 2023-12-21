@@ -14,7 +14,7 @@ const formSchema = z
       .min(2, message.minIs('아이디는', 2))
       .max(14, message.maxIs('아이디는', 14))
       .regex(
-        /^[A-Za-z]+$/,
+        /^[A-Za-z0-9]+$/,
         '아이디에는 한글 및 #, @, $, %, ^, & 기호를 사용할 수 없습니다.'
       ),
     password: z
@@ -33,6 +33,6 @@ const formSchema = z
 
 const nonKoreanStringSchema = z
   .string()
-  .refine((data) => /^[A-Za-z]+$/.test(data))
+  .refine((data) => /^[A-Za-z0-9]+$/.test(data))
 
 export { formSchema, nonKoreanStringSchema }
