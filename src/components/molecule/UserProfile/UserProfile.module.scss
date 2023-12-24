@@ -1,0 +1,43 @@
+@import '@/styles/colors';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 134px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+.profileArea {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.nameArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nameInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  margin: 12px 0;
+}
+
+.area {
+  display: flex;
+}
+
+.label:first-child {
+  margin-right: 4px;
+}
+
+.count {
+  margin-right: 4px;
+}
