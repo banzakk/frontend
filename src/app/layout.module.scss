@@ -1,9 +1,9 @@
 @import '@/styles/colors';
+@import '@/styles/mixins';
 
 .container {
   display: flex;
-  max-width: 1280px;
-  margin: 0 auto;
+  @include container();
 }
 
 .navSectionWrapper {
@@ -51,4 +51,26 @@
   flex-grow: 1;
   width: 250px;
   border-left: 1px solid $secondary;
+}
+
+.error {
+  margin-top: 50%;
+  transform: translateY(-50%);
+  h2 {
+    margin-top: 0.725rem;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+  }
+  .status {
+    font-weight: bold;
+    font-size: 5rem;
+    color: $primary;
+  }
+  .link {
+    display: inline-block;
+    margin-top: 2rem;
+    color: $primary;
+    text-decoration-line: underline;
+    font-weight: 600;
+  }
 }
