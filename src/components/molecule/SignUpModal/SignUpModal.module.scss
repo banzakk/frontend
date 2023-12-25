@@ -1,0 +1,6 @@
+@import '@/styles/mixins';
+
+.content {
+  padding-top: pxToRem(80);
+  padding-bottom: pxToRem(50);
+}

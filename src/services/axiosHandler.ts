@@ -1,4 +1,4 @@
-import { AxiosResponseHeaders, InternalAxiosRequestConfig } from 'axios'
+import axios, { AxiosResponseHeaders, InternalAxiosRequestConfig } from 'axios'
 
 const getTokenFromLocalStorage = () => {
   const accessToken = window.localStorage.getItem('accessToken')
@@ -13,4 +13,8 @@ const setHeader = (
   return config
 }
 
-export { getTokenFromLocalStorage, setHeader }
+const getAccessToken = () => {
+  return axios.post('/users/refresh-token')
+}
+
+export { getAccessToken, getTokenFromLocalStorage, setHeader }

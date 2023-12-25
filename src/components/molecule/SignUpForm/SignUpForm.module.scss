@@ -1,0 +1,85 @@
+@import '@/styles/colors';
+@import '@/styles/mixins';
+
+.formFieldContainer {
+  display: flex;
+  width: 100%;
+  gap: 0 pxToRem(22);
+  align-items: center;
+}
+
+.inputContainer {
+  &:first-child,
+  &:nth-child(2) {
+    margin-top: 0;
+  }
+  line-height: pxToRem(27);
+  position: relative;
+  margin-top: pxToRem(24);
+  flex: 1;
+  input {
+    margin-top: 0 !important;
+  }
+  &.userCustomId {
+    input {
+      padding-right: pxToRem(66);
+    }
+  }
+}
+
+.checkButton {
+  position: absolute;
+  right: 0;
+  padding: pxToRem(4) pxToRem(8);
+  z-index: 1;
+  height: auto;
+  font-weight: 500;
+  line-height: pxToRem(19);
+  top: pxToRem(8);
+}
+
+.underline {
+  color: $gray-strong;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  padding: pxToRem(8) 0;
+  font-weight: 400;
+}
+
+.divideLine {
+  width: pxToRem(250);
+  border-top: 1px solid $secondary;
+  position: relative;
+  margin: 0 auto;
+  span {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    background-color: $white;
+    padding: pxToRem(10);
+    color: $gray-strong;
+  }
+}
+
+.socialContainer {
+  display: flex;
+  justify-content: center;
+  gap: pxToRem(21);
+}
+.googleWrap {
+  width: pxToRem(36);
+  height: pxToRem(36);
+  border: 1px #d9d9d9 solid;
+  border-radius: 50%;
+  position: relative;
+  svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
