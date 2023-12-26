@@ -1,4 +1,5 @@
 import Typography from '@/components/atom/Typography/Typography'
+import LoginForm from '@/components/molecule/LoginForm/LoginForm'
 import Image from 'next/image'
 import cn from './login.module.scss'
 
@@ -15,6 +16,7 @@ export default function Page() {
           />
         </div>
         <Typography>반짝에 오신 것을 환영해요!</Typography>
+        <LoginForm />
       </div>
     </div>
   )

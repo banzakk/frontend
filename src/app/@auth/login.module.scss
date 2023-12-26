@@ -7,18 +7,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 100vh;
 }
+
 .login {
   max-width: pxToRem(320);
-  margin-top: 50%;
-  transform: translateY(-50%);
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: pxToRem(24);
   color: $black;
 }
+
 .logoWrap {
   display: flex;
   justify-content: center;

@@ -1,0 +1,62 @@
+@import '@/styles/colors';
+@import '@/styles/mixins';
+
+.formFieldContainer {
+  display: flex;
+  gap: pxToRem(16);
+  flex-wrap: wrap;
+}
+
+.inputContainer {
+  flex: 100% 0 0;
+  input {
+    padding: pxToRem(12);
+    text-align: center;
+    &::placeholder {
+      color: $gray-strong;
+    }
+  }
+}
+
+.button {
+  line-height: 1rem;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: pxToRem(24);
+}
+
+.signUpButton {
+  font-weight: 600;
+}
+
+.hoverBackgroundWhite {
+  &:hover {
+    background: $white;
+  }
+  &:hover {
+    color: $primary;
+  }
+}
+
+.divideLine {
+  border-top: 1px solid $secondary;
+  width: 100%;
+  margin: 0 pxToRem(16);
+}
+
+.marginRightBase {
+  margin-left: pxToRem(16);
+}
+
+.link {
+  display: flex;
+  width: 100%;
+  padding: pxToRem(16) 0;
+  border-radius: 50px;
+  border: 1px solid $primary;
+  color: $gray-strong;
+  justify-content: center;
+}
