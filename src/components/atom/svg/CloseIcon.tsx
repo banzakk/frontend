@@ -1,10 +1,6 @@
-interface IconProps {
-  size?: string
-  color?: string
-  className?: string
-}
+import { IconSvgProps } from '.'
 
-const CloseIcon: React.FC<IconProps> = ({
+const CloseIcon: React.FC<IconSvgProps> = ({
   size = '22',
   color = '#C29Dff',
   className,

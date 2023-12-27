@@ -1,11 +1,6 @@
-interface IconProps {
-  width?: string
-  height?: string
-  color?: string
-  className?: string
-}
+import { IconSvgProps } from '.'
 
-const RepostIcon: React.FC<IconProps> = ({
+const RepostIcon: React.FC<IconSvgProps> = ({
   width = '24',
   height = '18',
   color = '#C29DFF',

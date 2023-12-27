@@ -1,11 +1,10 @@
-interface IconProps {
-  size?: string
-  color?: string
-  className?: string
+import { IconSvgProps } from '.'
+
+interface LikeIconProps extends IconSvgProps{
   isFilled?: boolean
 }
 
-const LikeIcon: React.FC<IconProps> = ({
+const LikeIcon: React.FC<LikeIconProps> = ({
   size = '24',
   color = '#C29DFF',
   className,

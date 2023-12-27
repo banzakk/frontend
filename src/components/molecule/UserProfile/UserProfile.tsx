@@ -34,7 +34,7 @@ const UserProfile: React.FC = () => {
       <Typography size="14" className={cn.content}>
         {content}
       </Typography>
-      <div className={cn.area}>
+      <div className={cn.followContainer}>
         <div className={cn.label}>
           <Typography size="14" weight="600" className={cn.count}>
             {follow}

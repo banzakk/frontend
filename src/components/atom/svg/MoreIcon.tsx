@@ -1,10 +1,6 @@
-interface IconProps {
-  size?: string
-  color?: string
-  className?: string
-}
+import { IconSvgProps } from '.'
 
-const MoreIcon: React.FC<IconProps> = ({ size, color, className }) => {
+const MoreIcon: React.FC<IconSvgProps> = ({ size, color, className }) => {
   return (
     <svg
       className={className}

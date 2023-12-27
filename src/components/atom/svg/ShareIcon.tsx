@@ -1,11 +1,6 @@
-interface IconProps {
-  width?: string
-  height?: string
-  color?: string
-  className?: string
-}
+import { IconSvgProps } from '.'
 
-const ShareIcon: React.FC<IconProps> = ({
+const ShareIcon: React.FC<IconSvgProps> = ({
   width = '19',
   height = '22',
   color = '#C29DFF',
