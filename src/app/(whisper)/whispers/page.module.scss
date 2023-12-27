@@ -1,4 +1,5 @@
 @import '@/styles/colors';
+@import '@/styles/mixins';
 
 .container {
   display: flex;
@@ -8,8 +9,8 @@
 }
 
 .topWrapper {
-  width: 681px;
-  height: 160px;
+  width: pxToRem(680);
+  height: pxToRem(160);
   background-color: $white;
 }
 
@@ -18,23 +19,23 @@
   top: 0;
   width: inherit;
   height: inherit;
-  padding-top: 30px;
+  padding-top: pxToRem(30);
   background-color: $white;
 }
 
 .titleArea {
   // height: 149px;
-  margin-bottom: 16px;
-  padding: 0 27px 16px 27px;
+  margin-bottom: pxToRem(16);
+  padding: 0 pxToRem(26) pxToRem(16) pxToRem(26);
 }
 
 .title {
-  margin-bottom: 17px;
+  margin-bottom: pxToRem(16);
 }
 
 .subTitleArea {
-  margin: 16px 0;
-  padding: 12px 0;
+  margin: pxToRem(16) 0;
+  padding: pxToRem(12) 0;
   border-top: 1px solid $secondary;
   border-bottom: 1px solid $secondary;
   text-align: center;

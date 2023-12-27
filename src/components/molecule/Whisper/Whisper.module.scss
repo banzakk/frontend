@@ -1,16 +1,17 @@
 @import '@/styles/colors';
+@import '@/styles/mixins';
 
 .container {
-  min-height: 488px;
-  margin: 16px 0;
-  padding: 16px;
+  min-height: pxToRem(488);
+  margin: pxToRem(16) 0;
+  padding: pxToRem(16);
 }
 
 .imageArea {
-  width: 468px;
-  height: 350px;
-  margin-bottom: 16px;
-  border-radius: 30px;
+  width: pxToRem(468);
+  height: pxToRem(350);
+  margin-bottom: pxToRem(16);
+  border-radius: pxToRem(30);
   background-color: $secondary;
 }
 
@@ -26,19 +27,19 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 16px;
-  padding: 0 15px;
+  margin-bottom: pxToRem(16);
+  padding: 0 pxToRem(16);
 }
 
 .contentContainer {
   display: flex;
-  width: 500px;
-  padding: 5px;
+  width: pxToRem(500);
+  padding: pxToRem(6);
 }
 
 .nickNameArea {
-  width: 70px;
-  margin-right: 20px;
+  width: pxToRem(70);
+  margin-right: pxToRem(20);
 }
 
 .nickName {
@@ -51,9 +52,8 @@
 }
 
 .icon {
-  margin-right: 5px;
+  margin-right: 6px;
 }
-
 
 .hashTag {
   color: $primary;

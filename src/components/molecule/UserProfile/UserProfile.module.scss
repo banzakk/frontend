@@ -1,18 +1,19 @@
 @import '@/styles/colors';
+@import '@/styles/mixins';
 
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 134px;
+  width: pxToRem(134);
   margin: 0 auto;
-  margin-bottom: 40px;
+  margin-bottom: pxToRem(40);
 }
 
 .profileArea {
   display: flex;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: pxToRem(12);
 }
 
 .nameArea {
@@ -27,17 +28,17 @@
 }
 
 .content {
-  margin: 12px 0;
+  margin: pxToRem(12) 0;
 }
 
-.area {
+.followContainer {
   display: flex;
 }
 
 .label:first-child {
-  margin-right: 4px;
+  margin-right: pxToRem(4);
 }
 
 .count {
-  margin-right: 4px;
+  margin-right: pxToRem(4);
 }
