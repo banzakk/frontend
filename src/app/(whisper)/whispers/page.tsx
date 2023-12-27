@@ -1,7 +1,7 @@
 import Typography from '@/components/atom/Typography/Typography'
-import cn from './page.module.scss'
 import WhispersList from '@/components/molecule/WhispersList/WhispersList'
 import { Whisper } from '@/types/whisper'
+import cn from './page.module.scss'
 
 export default async function WhispersPage() {
   const whispers: Whisper[] = [
@@ -9,7 +9,8 @@ export default async function WhispersPage() {
       whisperId: 1,
       nickname: '춉춉쓰',
       imgUrl: '/images/hamster5.jpeg',
-      content: '우리 햄스터 귀엽죠',
+      content: '우리 #햄스터 귀엽죠 #해시태그테스트2 #태그3',
+      hashTag: ['#햄스터','#해시태그테스트2 #태그3'],
       comments: [
         {
           commentId: 1,

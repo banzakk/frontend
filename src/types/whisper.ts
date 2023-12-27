@@ -4,6 +4,7 @@ export type Whisper = {
   imgUrl: string
   content: string
   comments?: Comment[]
+  hashTag?: string[]
 }
 
 export type Comment = {

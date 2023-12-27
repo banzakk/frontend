@@ -6,7 +6,6 @@ import {
   MouseEventHandler,
   useState,
 } from 'react'
-import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import TextareaAutosize from 'react-textarea-autosize'
@@ -14,6 +13,8 @@ import UploadImg from '../UploadImg/UploadImg'
 import CloseIcon from '@/components/atom/svg/CloseIcon'
 import { Button } from '@/components/ui/button'
 import cn from './Post.module.scss'
+import { axiosInstance } from '@/services'
+import Link from 'next/link'
 
 const Post = () => {
   const [content, setContent] = useState('')
@@ -21,41 +22,40 @@ const Post = () => {
   const [preview, setPreview] = useState<string[]>([])
   const [files, setFiles] = useState<File[]>([])
   const router = useRouter()
-  const api = process.env.NEXT_PUBLIC_SERVER_URL || ''
+  const api = process.env.NEXT_PUBLIC_POST_SERVER_URI || ''
+  const token = process.env.NEXT_PUBLIC_LOGIN_TOKEN || ''
+  const instance = axiosInstance()
 
   const mutation = useMutation({
     mutationFn: async (data: FormData) => {
-      return await axios.post(api, data, {
+      return await instance.post(`${api}/whispers`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
     },
     onSuccess(response) {
-      if (response) {
-        alert('업로드성공')
-      }
+      alert(response.data)
+      localStorage.removeItem('accessToken')
     },
     onError(error) {
       console.error(error)
       alert('업로드 오류가 발생했습니다.')
+      localStorage.removeItem('accessToken')
     },
   })
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
+    localStorage.setItem('accessToken', token)
     if (content.length === 0 && files.length === 0) {
       alert('내용을 입력해주세요.')
       return
     }
     const formData = new FormData()
     formData.append('content', content)
-    for (let i = 0; i < files.length; i++) {
-      formData.append('image', files[i])
-    }
-    for (let i = 0; i < hashArr.length; i++) {
-      formData.append('hashTag', hashArr[i])
-    }
+    files.forEach((file) => formData.append('image', file))
+    hashArr.forEach((tag) => formData.append('hashTag', tag.substring(1)))
     mutation.mutate(formData)
   }
 
@@ -83,7 +83,7 @@ const Post = () => {
     if (
       lines.length > 20 ||
       contentValue.length > 200 ||
-      (hashtags && hashtags.some((tag) => tag.length > 11))
+      (hashtags && hashtags.some((tag) => tag.length > 10))
     ) {
       return
     }
@@ -131,6 +131,26 @@ const Post = () => {
     })
   }
 
+    const replaceHashTagWithLink = (text: string, hashTags?: string[]) => {
+      if (!hashTags || hashTags.length === 0) {
+        return [text]
+      }
+  
+      const regex = new RegExp(`(${hashTags.join('|')})`, 'g')
+      const parts = text.split(regex)
+  
+      return parts.map((part, index) =>
+        regex.test(part) ? (
+          <Link href="/" key={index} className={cn.hashTag}>
+            {part}
+          </Link>
+        ) : (
+          part
+        )
+      )
+    }
+  const renderedContent = replaceHashTagWithLink(content, hashArr)
+
   return (
     <>
       <div className={cn.modalBackground} onClick={handleClose}>
@@ -147,14 +167,17 @@ const Post = () => {
                 </button>
               </div>
 
-              <TextareaAutosize
-                cacheMeasurements
-                minRows={5}
-                maxRows={15}
-                className={cn.textArea}
-                onChange={handleContent}
-                value={content}
-              />
+              <div className={cn.textareaContainer}>
+                <TextareaAutosize
+                  cacheMeasurements
+                  minRows={5}
+                  // maxRows={30}
+                  className={cn.textArea}
+                  onChange={handleContent}
+                  value={content}
+                />
+                <div className={cn.contentArea}>{renderedContent}</div>
+              </div>
 
               {preview.length > 0 && (
                 <div className={cn.previewContainer}>

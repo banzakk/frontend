@@ -34,10 +34,21 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.textareaContainer {
+  position: relative;
+}
 .textArea {
   width: 100%;
   border: none;
   resize: none;
+  background-color: transparent;
+  color: $primary;
+}
+
+.contentArea {
+  position: absolute;
+  top: 0;
+  white-space: pre-line;
 }
 
 .fileIcon {
