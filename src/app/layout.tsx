@@ -23,8 +23,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
   modal: React.ReactNode
+  auth: React.ReactNode,
 }) {
-  const isLoggedIn = false
+  const isLoggedIn = true
   return (
     <html lang="ko">
       <head>
