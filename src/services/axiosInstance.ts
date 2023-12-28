@@ -37,7 +37,11 @@ const responseInterceptor = (axiosInstance: AxiosInstance) => {
     async function (error: { response: { status: number } }) {
       if (error.response?.status === 401) {
         const res = await getAccessToken()
-        localStorage.setItem('accessToken', res.data.accessToken)
+        if (res.data) {
+          localStorage.setItem('accessToken', res.data.accessToken)
+        } else {
+          localStorage.removeItem('accessToken')
+        }
       }
       if (error.response?.status === 500) {
         alert('일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
