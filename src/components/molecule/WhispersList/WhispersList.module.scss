@@ -1,0 +1,12 @@
+@import '@/styles/colors';
+
+.WhisperArea {
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  border-bottom: 1px solid $gray-normal;
+  display: flex;
+  justify-content: center;;
+}

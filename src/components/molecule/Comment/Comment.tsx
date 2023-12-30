@@ -2,10 +2,10 @@ import Typography from '@/components/atom/Typography/Typography'
 import ProfileImg from '@/components/atom/ProfileImg/ProfileImg'
 import LikeIcon from '@/components/atom/svg/LikeIcon'
 import CommentIcon from '@/components/atom/svg/CommentIcon'
-import { Comment as CommentType } from '@/types/whisper'
+import { CommentProps } from '@/types'
 import cn from './Comment.module.scss'
 
-export default function Comment(comment: CommentType) {
+export default function Comment(comment: CommentProps) {
   const { nickname, imgUrl, content } = comment
 
   return (

@@ -1,16 +1,20 @@
 import Typography from '@/components/atom/Typography/Typography'
 import WhispersList from '@/components/molecule/WhispersList/WhispersList'
-import { Whisper } from '@/types/whisper'
+import { WhisperProps } from '@/types'
 import cn from './page.module.scss'
 
 export default async function WhispersPage() {
-  const whispers: Whisper[] = [
+  const whispers: WhisperProps[] = [
     {
       whisperId: 1,
       nickname: '춉춉쓰',
-      imgUrl: '/images/hamster5.jpeg',
+      imgUrl: [
+        '/images/hamster5.jpeg',
+        '/images/hamster4.jpeg',
+        '/images/hamster3.jpeg',
+      ],
       content: '우리 #햄스터 귀엽죠 #해시태그테스트2 #태그3',
-      hashTag: ['#햄스터','#해시태그테스트2 #태그3'],
+      hashTag: ['#햄스터', '#해시태그테스트2', '#태그3'],
       comments: [
         {
           commentId: 1,
@@ -29,7 +33,7 @@ export default async function WhispersPage() {
     {
       whisperId: 2,
       nickname: '냠냠쓰',
-      imgUrl: '/images/hamster2.jpeg',
+      imgUrl: ['/images/hamster2.jpeg'],
       content: '우리 햄스터 짱귀엽죠',
       comments: [
         {
@@ -43,7 +47,7 @@ export default async function WhispersPage() {
     {
       whisperId: 3,
       nickname: '춉춉춉',
-      imgUrl: '/images/hamster3.jpeg',
+      imgUrl: ['/images/hamster3.jpeg'],
       content: '우리 냠냠쓰를 봐주세요',
     },
   ]

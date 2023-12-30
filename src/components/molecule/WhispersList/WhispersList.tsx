@@ -1,15 +1,17 @@
-import { Whisper as WhisperType} from "@/types/whisper";
-import  Whisper  from "@/components/molecule/Whisper/Whisper";
+import Whisper from '@/components/molecule/Whisper/Whisper'
+import { WhisperProps } from '@/types'
+import cn from './WhispersList.module.scss'
 
-const WhispersList: React.FC<{ whispers: WhisperType[] }> = ({ whispers }) => {
+const WhispersList: React.FC<{ whispers: WhisperProps[] }> = ({ whispers }) => {
   return (
-    <div>
+    <ul className={cn.WhisperArea}>
       {whispers.map((whisper) => (
-        <Whisper key={whisper.whisperId} {...whisper} />
+        <li key={whisper.whisperId} className={cn.container}>
+            <Whisper {...whisper} />
+        </li>
       ))}
-    </div>
-  );
-};
+    </ul>
+  )
+}
 
-export default WhispersList;
-
+export default WhispersList

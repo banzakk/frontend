@@ -2,16 +2,17 @@
 
 import { Button } from '@/components/ui/button'
 import Typography from '@/components/atom/Typography/Typography'
+import Carousel from '../Carousel/Carousel'
 import LikeIcon from '@/components/atom/svg/LikeIcon'
 import RepostIcon from '@/components/atom/svg/RepostIcon'
 import ShareIcon from '@/components/atom/svg/ShareIcon'
 import Comment from '@/components/molecule/Comment/Comment'
-import { Whisper as WhisperType } from '@/types/whisper'
+import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
 import Link from 'next/link'
 
-export default function Whisper<ContentProps>(whisper: WhisperType) {
-  const { nickname, imgUrl, content, hashTag, comments } = whisper
+export default function Whisper(whisper: WhisperProps) {
+  const { whisperId, nickname, imgUrl, content, hashTag, comments } = whisper
 
   // 해시태그 css 변경
   const replaceHashTagWithLink = (text: string, hashTags?: string[]) => {
@@ -21,7 +22,6 @@ export default function Whisper<ContentProps>(whisper: WhisperType) {
 
     const regex = new RegExp(`(${hashTags.join('|')})`, 'g')
     const parts = text.split(regex)
-
 
     return parts.map((part, index) =>
       regex.test(part) ? (
@@ -34,18 +34,9 @@ export default function Whisper<ContentProps>(whisper: WhisperType) {
     )
   }
   const renderedContent = replaceHashTagWithLink(content, hashTag)
-
   return (
     <div className={cn.container}>
-      <div className={cn.imageArea}>
-        <img
-          src={imgUrl}
-          alt="whisperImages"
-          className={cn.image}
-          width={468}
-          height={350}
-        />
-      </div>
+      <Carousel PostImages={imgUrl} className={cn.imageArea} />
       <div className={cn.actionContainer}>
         <LikeIcon isFilled={false} className={cn.icon} />
         <RepostIcon className={cn.icon} />
@@ -66,9 +57,11 @@ export default function Whisper<ContentProps>(whisper: WhisperType) {
           {comments.map((comment) => (
             <Comment key={comment.commentId} {...comment} />
           ))}
-          <Button variant="link" className="text-primary">
-            댓글 더 불러오기
-          </Button>
+          <Link href={`whispers/${whisperId}`}>
+            <Button variant="link" className="text-primary">
+              댓글 더 불러오기
+            </Button>
+          </Link>
         </div>
       )}
     </div>

@@ -1,13 +1,13 @@
-export type Whisper = {
+export type WhisperProps = {
   whisperId: number
   nickname: string
-  imgUrl: string
+  imgUrl: string[]
   content: string
-  comments?: Comment[]
+  comments?: CommentProps[]
   hashTag?: string[]
 }
 
-export type Comment = {
+export type CommentProps = {
   commentId: number,
   nickname: string,
   imgUrl: string,

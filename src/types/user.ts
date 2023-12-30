@@ -1,4 +1,4 @@
-export type User = {
+export type UserProps = {
   userId: string
   nickname: string
   profileImg: string
