@@ -1,20 +1,17 @@
+'use client'
+
 import Logo from '@/components/atom/svg/Logo'
 import WriteIcon from '@/components/atom/svg/WriteIcon'
 import { Nav } from '@/components/molecule/Nav/Nav'
 import UserProfile from '@/components/molecule/UserProfile/UserProfile'
 import { Button } from '@/components/ui/button'
 import { CATEGORY } from '@/constants/categoryList'
+import useTokenCheck from '@/hooks/useTokenCheck'
 import Providers from '@/states/server/Providers'
 import '@/styles/globals.scss'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Metadata } from 'next'
 import Link from 'next/link'
 import cn from './layout.module.scss'
-
-export const metadata: Metadata = {
-  title: 'Banzakk',
-  icons: { icon: 'http://localhost:3000/favicon.ico' },
-}
 
 export default function RootLayout({
   children,
@@ -23,9 +20,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
   modal: React.ReactNode
-  auth: React.ReactNode,
+  auth: React.ReactNode
 }) {
-  const isLoggedIn = true
+  const isLoggedIn = useTokenCheck()
   return (
     <html lang="ko">
       <head>

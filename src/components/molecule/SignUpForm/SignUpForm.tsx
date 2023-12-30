@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { postEmailCheck, postIdCheck, postSignUp } from '@/services/signup'
+import { postEmailCheck, postIdCheck, postSignUp } from '@/services'
 import { ProgressStatus, UserDto } from '@/types'
 import { FormErrorBuilder } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'

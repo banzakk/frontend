@@ -1,7 +1,16 @@
+'use client'
+
+import Spinner from '@/components/atom/Spinner/Spinner'
+import { useEffect, useState } from 'react'
+
 export default function MainLayout({
-  children, // will be a page or nested layout
+  children,
 }: {
   children: React.ReactNode
 }) {
-  return <section>{children}</section>
+  const [mounted, setMounted] = useState<boolean>()
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  return <section>{mounted ? children : <Spinner />}</section>
 }
