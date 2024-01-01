@@ -14,3 +14,9 @@ export const postIdCheck = (data: Pick<UserDto, 'userCustomId'>) => {
 export const postEmailCheck = (data: Pick<UserDto, 'email'>) => {
   return axios.post(`/users/email-check`, data)
 }
+
+export const postProfileImage = (data) => {
+  return axios.post('/users/profile-image', data, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+}
