@@ -1,7 +1,7 @@
 export type WhisperProps = {
   whisperId: number
-  nickname: string
-  imgUrl: string[]
+  nickName: string
+  imageUrl: string[]
   content: string
   comments?: CommentProps[]
   hashTag?: string[]
@@ -9,7 +9,7 @@ export type WhisperProps = {
 
 export type CommentProps = {
   commentId: number,
-  nickname: string,
-  imgUrl: string,
+  nickName: string,
+  profileUrl: string,
   content: string
 }

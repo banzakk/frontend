@@ -12,7 +12,7 @@ import cn from './Whisper.module.scss'
 import Link from 'next/link'
 
 export default function Whisper(whisper: WhisperProps) {
-  const { whisperId, nickname, imgUrl, content, hashTag, comments } = whisper
+  const { whisperId, nickName, imageUrl, content, hashTag, comments } = whisper
 
   // 해시태그 css 변경
   const replaceHashTagWithLink = (text: string, hashTags?: string[]) => {
@@ -36,7 +36,7 @@ export default function Whisper(whisper: WhisperProps) {
   const renderedContent = replaceHashTagWithLink(content, hashTag)
   return (
     <div className={cn.container}>
-      <Carousel PostImages={imgUrl} className={cn.imageArea} />
+      <Carousel PostImages={imageUrl} className={cn.imageArea} />
       <div className={cn.actionContainer}>
         <LikeIcon isFilled={false} className={cn.icon} />
         <RepostIcon className={cn.icon} />
@@ -45,7 +45,7 @@ export default function Whisper(whisper: WhisperProps) {
       <div className={cn.contentContainer}>
         <div className={cn.nickNameArea}>
           <Typography size="14" type="div" weight="800" className={cn.nickName}>
-            {nickname}
+            {nickName}
           </Typography>
         </div>
         <div className={cn.contentArea}>

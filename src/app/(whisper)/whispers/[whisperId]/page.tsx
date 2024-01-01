@@ -1,11 +1,10 @@
 import Whisper from '@/components/molecule/Whisper/Whisper'
-import { WhisperProps } from '@/types'
 
 export default function Page({ params }: { params: { whisperId: string } }) {
   const whisper = {
     whisperId: 1,
-    nickname: '춉춉쓰',
-    imgUrl: [
+    nickName: '춉춉쓰',
+    imageUrl: [
       '/images/hamster5.jpeg',
       '/images/hamster4.jpeg',
       '/images/hamster3.jpeg',
@@ -15,14 +14,14 @@ export default function Page({ params }: { params: { whisperId: string } }) {
     comments: [
       {
         commentId: 1,
-        nickname: '춉챱춉챱',
-        imgUrl: '/images/hamster4.jpeg',
+        nickName: '춉챱춉챱',
+        profileUrl: '/images/hamster4.jpeg',
         content: '몇살인가요?',
       },
       {
         commentId: 2,
-        nickname: '박찌',
-        imgUrl: '/images/hamster5.jpeg',
+        nickName: '박찌',
+        profileUrl: '/images/hamster5.jpeg',
         content: '너무기엽다',
       },
     ],

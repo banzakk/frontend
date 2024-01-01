@@ -6,14 +6,14 @@ import { CommentProps } from '@/types'
 import cn from './Comment.module.scss'
 
 export default function Comment(comment: CommentProps) {
-  const { nickname, imgUrl, content } = comment
+  const { nickName, profileUrl, content } = comment
 
   return (
     <div className={cn.commentArea}>
       <div className={cn.nickNameArea}>
-        <ProfileImg src={imgUrl} alt="profileImg" className={cn.profile} />
+        <ProfileImg src={profileUrl} alt="profileImg" className={cn.profile} />
         <Typography size="14" type="div" weight="800" className={cn.nickName}>
-          {nickname}
+          {nickName}
         </Typography>
       </div>
       <div className={cn.contentArea}>
