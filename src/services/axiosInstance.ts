@@ -36,7 +36,7 @@ const responseInterceptor = (axiosInstance: AxiosInstance) => {
     },
     async function (error: { response: { status: number } }) {
       if (error.response?.status === 401) {
-        const res = await getAccessToken()
+        const res = await getAccessToken(axiosInstance)
         if (res.data) {
           localStorage.setItem('accessToken', res.data.accessToken)
         } else {
