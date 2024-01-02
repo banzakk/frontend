@@ -6,6 +6,10 @@ import { ProgressStatus } from '@/types'
 import { SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 
+type FormData = {
+  image: FileList
+}
+
 export function ProfileImageForm({
   setProgress,
   customId,
@@ -13,13 +17,14 @@ export function ProfileImageForm({
   setProgress: React.Dispatch<SetStateAction<ProgressStatus>>
   customId?: string
 }) {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit } = useForm<FormData>()
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: FormData) => {
     const formData = new FormData()
+    const files = data.image
 
-    if (data.image[0] && data.image[0].name) {
-      formData.append('image', data.image[0])
+    if (files && files.length) {
+      formData.append('image', files[0])
     }
 
     if (customId) {
