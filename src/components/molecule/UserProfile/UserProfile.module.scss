@@ -16,6 +16,11 @@
   margin-bottom: pxToRem(12);
 }
 
+.profile {
+  width: pxToRem(80);
+  height: pxToRem(80);
+}
+
 .nameArea {
   display: flex;
   justify-content: space-between;
