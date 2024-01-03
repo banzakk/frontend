@@ -5,16 +5,19 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { ProgressStatus } from '@/types'
 import Link from 'next/link'
-import React, { SetStateAction, useEffect, useState } from 'react'
+import React, { SetStateAction, useState } from 'react'
+import ProfileImageForm from '../ProfileImageForm/ProfileImageForm'
 import { SignUpForm } from '../SignUpForm/SignUpForm'
 import { SignUpModal } from '../SignUpModal/SignUpModal'
 import cn from './ProgressModal.module.scss'
 
-const SignUp = ({
-  setProgress,
-}: {
-  setProgress: React.Dispatch<SetStateAction<ProgressStatus>>
-}) => {
+type ProgressComponentType = {
+  setProgress: React.Dispatch<React.SetStateAction<ProgressStatus>>
+  setCustomId?: React.Dispatch<React.SetStateAction<string>>
+  customId?: string
+}
+
+const SignUp = ({ setProgress, setCustomId }: ProgressComponentType) => {
   return (
     <>
       {/* <Link href="/">뒤로</Link> */}
@@ -22,7 +25,7 @@ const SignUp = ({
         회원가입을 위해 <br />
         정보를 입력해주세요.
       </Typography>
-      <SignUpForm setProgress={setProgress} />
+      <SignUpForm setProgress={setProgress} setCustomId={setCustomId} />
     </>
   )
 }
@@ -33,9 +36,6 @@ const Agreement = ({
   setProgress: React.Dispatch<SetStateAction<ProgressStatus>>
 }) => {
   const [active, setActive] = useState(false)
-  useEffect(() => {
-    console.log(active)
-  }, [active])
 
   return (
     <>
@@ -72,23 +72,30 @@ const Agreement = ({
         />
         내용을 확인하였으며 정보 제공에 동의합니다.
       </div>
-      <Button size="full" disabled={!active}>
-        <Link href="/">완료</Link>
+      <Button
+        size="full"
+        disabled={!active}
+        onClick={() => {
+          setProgress('picture')
+        }}
+      >
+        완료
       </Button>
     </>
   )
 }
 
-const Picture = ({
-  setProgress,
-}: {
-  setProgress: React.Dispatch<SetStateAction<ProgressStatus>>
-}) => {
+const Picture = ({ setProgress, customId }: ProgressComponentType) => {
   return (
-    <Typography type="h2" weight="600" size="24" className={cn.header}>
-      회원가입을 위해 <br />
-      정보를 입력해주세요.
-    </Typography>
+    <>
+      <Typography type="h2" weight="600" size="24" className={cn.header}>
+        나만의 개성이 담긴 <br />
+        프로필 이미지를 설정해 주세요.
+      </Typography>
+      <div className={cn.profileImage}>
+        <ProfileImageForm setProgress={setProgress} customId={customId} />
+      </div>
+    </>
   )
 }
 
@@ -117,12 +124,9 @@ const Follow = ({
     </Typography>
   )
 }
+
 const progressComponent: {
-  [key: string]: ({
-    setProgress,
-  }: {
-    setProgress: React.Dispatch<SetStateAction<ProgressStatus>>
-  }) => React.JSX.Element
+  [key: string]: (props: ProgressComponentType) => React.JSX.Element
 } = {
   signup: SignUp,
   agreement: Agreement,
@@ -131,19 +135,32 @@ const progressComponent: {
   follow: Follow,
 }
 
-const ProgressComponent = (props: {
-  type: string
-  setProgress: React.Dispatch<SetStateAction<ProgressStatus>>
-}) => {
+const ProgressComponent = (
+  props: {
+    type: string
+  } & ProgressComponentType
+) => {
   const SpecificModal = progressComponent[props.type]
-  return <SpecificModal setProgress={props.setProgress} />
+  return (
+    <SpecificModal
+      setProgress={props.setProgress}
+      setCustomId={props.setCustomId}
+      customId={props.customId}
+    />
+  )
 }
 const ProgressModal = () => {
   const [progressState, setProgressState] = useState<ProgressStatus>('signup')
+  const [customId, setCustomId] = useState<string>('')
 
   return (
     <SignUpModal>
-      <ProgressComponent type={progressState} setProgress={setProgressState} />
+      <ProgressComponent
+        type={progressState}
+        setProgress={setProgressState}
+        setCustomId={setCustomId}
+        customId={customId}
+      />
     </SignUpModal>
   )
 }

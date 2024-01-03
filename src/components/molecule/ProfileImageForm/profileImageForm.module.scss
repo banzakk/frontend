@@ -1,0 +1,47 @@
+@import '@/styles/mixins';
+@import '@/styles/colors';
+
+.formContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: pxToRem(36);
+}
+
+.imageContainer {
+  position: relative;
+}
+
+.imageInput {
+  display: none;
+}
+
+.imageWrap {
+  width: pxToRem(300);
+  height: pxToRem(300);
+  background: $primary;
+  border-radius: 100%;
+  overflow: hidden;
+
+  &.imageExist {
+    background-position: center;
+    background-size: cover;
+    background-color: $white;
+    border: 1px solid $secondary;
+  }
+}
+
+.fileButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  font-size: 82px;
+  cursor: pointer;
+  &.invisible {
+    opacity: 0;
+  }
+}

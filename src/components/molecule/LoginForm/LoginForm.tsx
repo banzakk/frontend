@@ -28,6 +28,7 @@ const LoginForm = (props: Props) => {
       const res = await postLogin(data)
       if (res.data) {
         localStorage.setItem('accessToken', res.data.accessToken)
+        window.location.href = '/whispers'
       }
     } catch (err) {
       if (axios.isAxiosError(err)) {
