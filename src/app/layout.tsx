@@ -1,5 +1,7 @@
 'use client'
 
+import Providers from '@/states/server/Providers'
+import Link from 'next/link'
 import Logo from '@/components/atom/svg/Logo'
 import WriteIcon from '@/components/atom/svg/WriteIcon'
 import { Nav } from '@/components/molecule/Nav/Nav'
@@ -7,10 +9,7 @@ import UserProfile from '@/components/molecule/UserProfile/UserProfile'
 import { Button } from '@/components/ui/button'
 import { CATEGORY } from '@/constants/categoryList'
 import useTokenCheck from '@/hooks/useTokenCheck'
-import Providers from '@/states/server/Providers'
 import '@/styles/globals.scss'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import Link from 'next/link'
 import cn from './layout.module.scss'
 
 export default function RootLayout({
@@ -72,7 +71,6 @@ export default function RootLayout({
           ) : (
             auth
           )}
-          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </Providers>
       </body>
     </html>
