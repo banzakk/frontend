@@ -49,7 +49,7 @@ export function ProfileImageForm({
 
     try {
       await postProfileImage(formData)
-      setProgress('agreement')
+      window.location.href = '/whispers'
     } catch (err) {
       console.error(err)
     }
@@ -91,7 +91,11 @@ export function ProfileImageForm({
         <Typography color="gray-strong">
           <Link href="/whispers">지금은 건너뛰기</Link>
         </Typography>
-        <Button type="submit" size="full" disabled={!imagePreviewUrl}>
+        <Button
+          type="submit"
+          size="full"
+          disabled={!imagePreviewUrl && !customId}
+        >
           다음
         </Button>
       </div>

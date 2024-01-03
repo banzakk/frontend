@@ -150,7 +150,7 @@ const ProgressComponent = (
   )
 }
 const ProgressModal = () => {
-  const [progressState, setProgressState] = useState<ProgressStatus>('picture')
+  const [progressState, setProgressState] = useState<ProgressStatus>('signup')
   const [customId, setCustomId] = useState<string>('')
 
   return (
