@@ -1,17 +1,21 @@
 @import '@/styles/mixins';
 @import '@/styles/colors';
+
 .header {
   margin-bottom: pxToRem(48);
   line-height: normal;
 }
+
 .description {
   line-height: normal;
 }
+
 .link {
   color: $primary;
   text-decoration-line: underline;
   font-weight: 600;
 }
+
 .checkWrap {
   display: flex;
   align-items: center;
@@ -20,4 +24,8 @@
   gap: pxToRem(8);
   font-weight: 400;
   margin: pxToRem(40) 0;
+}
+
+.skip {
+  text-align: center;
 }

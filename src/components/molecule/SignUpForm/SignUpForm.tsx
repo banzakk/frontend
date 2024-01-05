@@ -25,8 +25,10 @@ import { formSchema, nonKoreanStringSchema } from './signUpFormSchema'
 
 export function SignUpForm({
   setProgress,
+  setCustomId,
 }: {
   setProgress: React.Dispatch<SetStateAction<ProgressStatus>>
+  setCustomId?: React.Dispatch<SetStateAction<string>>
 }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,8 +46,11 @@ export function SignUpForm({
     try {
       const { email, password, userCustomId, name } = data
       const formData = { email, password, userCustomId, name }
-      await postSignUp(formData)
-      setProgress('agreement')
+      const res = await postSignUp(formData)
+      if (res.data.userCustomId) {
+        setProgress('agreement')
+        setCustomId && setCustomId(res.data.userCustomId)
+      }
     } catch (err) {
       if (axios.isAxiosError(err)) {
         if (err.response?.status === 400) {
