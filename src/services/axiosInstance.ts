@@ -44,7 +44,7 @@ const responseInterceptor = (axiosInstance: AxiosInstance) => {
             localStorage.setItem('accessToken', res.data.accessToken)
           } else {
             localStorage.removeItem('accessToken')
-            window.location.href = '/whispers'
+            window.location.href = '/'
           }
         } catch (err) {
           localStorage.removeItem('accessToken')
