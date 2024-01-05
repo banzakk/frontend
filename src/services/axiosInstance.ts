@@ -29,18 +29,27 @@ const requestInterceptor = (axiosInstance: AxiosInstance) => {
   )
 }
 
+let isRefreshingToken = false
 const responseInterceptor = (axiosInstance: AxiosInstance) => {
   axiosInstance.interceptors.response.use(
     (response) => {
       return response
     },
     async function (error: { response: { status: number } }) {
-      if (error.response?.status === 401) {
-        const res = await getAccessToken(axiosInstance)
-        if (res.data) {
-          localStorage.setItem('accessToken', res.data.accessToken)
-        } else {
+      if (error.response?.status === 401 && !isRefreshingToken) {
+        isRefreshingToken = true
+        try {
+          const res = await getAccessToken()
+          if (res.data) {
+            localStorage.setItem('accessToken', res.data.accessToken)
+          } else {
+            localStorage.removeItem('accessToken')
+            window.location.href = '/'
+          }
+        } catch (err) {
           localStorage.removeItem('accessToken')
+        } finally {
+          isRefreshingToken = false
         }
       }
       if (error.response?.status === 500) {
