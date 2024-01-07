@@ -36,9 +36,13 @@ export default function Whisper(whisper: WhisperProps) {
   const renderedContent = replaceHashTagWithLink(content, hashTag)
   return (
     <div className={cn.container}>
-      <Carousel PostImages={imageUrl} className={cn.imageArea} />
+      {imageUrl.length > 0 && (
+        <Carousel PostImages={imageUrl} className={cn.imageArea} />
+      )}
       <div className={cn.actionContainer}>
-        <LikeIcon isFilled={false} className={cn.icon} />
+        <Link href={`whispers/${whisperId}`}>
+          <LikeIcon isFilled={false} className={cn.icon} />
+        </Link>
         <RepostIcon className={cn.icon} />
         <ShareIcon />
       </div>
