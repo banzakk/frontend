@@ -21,27 +21,6 @@
   margin: 0 auto;
 }
 
-.fixedWrapper {
-  position: fixed;
-  width: pxToRem(250);
-}
-
-.navArea {
-  display: flex;
-  flex-direction: column;
-  width: pxToRem(204);
-  margin: 0 auto;
-}
-
-.logo {
-  width: 60px;
-  margin: 30px 0;
-}
-
-.icon {
-  margin: 8px;
-}
-
 .mainSectionWrapper {
   width: pxToRem(680)
 }
