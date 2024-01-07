@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form'
 import cn from './profileImageForm.module.scss'
 
 type FormData = {
-  image: FileList
+  image: File | null
 }
 
 export function ProfileImageForm({
@@ -21,12 +21,13 @@ export function ProfileImageForm({
   setProgress: React.Dispatch<SetStateAction<ProgressStatus>>
   customId?: string
 }) {
-  const { register, handleSubmit } = useForm<FormData>()
+  const { register, handleSubmit, setValue } = useForm<FormData>()
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>()
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
+      setValue('image', file)
       const reader = new FileReader()
       reader.onloadend = () => {
         setImagePreviewUrl(reader.result as string)
@@ -37,19 +38,16 @@ export function ProfileImageForm({
 
   const onSubmit = async (data: FormData) => {
     const formData = new FormData()
-    const files = data.image
-
-    if (files && files.length) {
-      formData.append('image', files[0])
+    const file = data.image
+    if (file) {
+      formData.append('image', file)
     }
-
     if (customId) {
       formData.append('userCustomId', customId)
     }
-
     try {
       await postProfileImage(formData)
-      window.location.href = '/whispers'
+      window.location.href = '/'
     } catch (err) {
       console.error(err)
     }
@@ -89,7 +87,7 @@ export function ProfileImageForm({
           ></div>
         </div>
         <Typography color="gray-strong">
-          <Link href="/whispers">지금은 건너뛰기</Link>
+          <Link href="/">지금은 건너뛰기</Link>
         </Typography>
         <Button
           type="submit"
