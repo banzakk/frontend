@@ -12,7 +12,7 @@ const ProfileImg: React.FC<ProfileImgProps> = ({ src, alt, className }) => {
 
   return (
     <div className={containerClass}>
-      <img className={styles.img} src={src} alt={alt} />
+      {src && <img className={styles.img} src={src} alt={alt} />}
     </div>
   )
 }
