@@ -1,8 +1,13 @@
 export type UserProps = {
-  userId: string
-  nickname: string
-  profileImg: string
-  content: string
-  follow: string
-  follower: string
+  user: User
+  followingCount: number
+  followerCount: number
+}
+
+export type User = {
+  userId: number
+  name: string
+  email: string
+  userCustomId: string
+  userProfileImageUrl: string
 }
