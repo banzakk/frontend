@@ -22,8 +22,7 @@ const Post = () => {
   const [preview, setPreview] = useState<string[]>([])
   const [files, setFiles] = useState<File[]>([])
   const router = useRouter()
-  const api = process.env.NEXT_PUBLIC_POST_SERVER_URI || ''
-  const token = process.env.NEXT_PUBLIC_LOGIN_TOKEN || ''
+  const api = process.env.NEXT_PUBLIC_SERVER_URI || ''
   const instance = axiosInstance()
 
   const mutation = useMutation({
@@ -34,20 +33,18 @@ const Post = () => {
         },
       })
     },
-    onSuccess(response) {
-      alert(response.data)
-      localStorage.removeItem('accessToken')
+    onSuccess() {
+      alert('작성 완료')
+      router.back()
     },
     onError(error) {
       console.error(error)
       alert('업로드 오류가 발생했습니다.')
-      localStorage.removeItem('accessToken')
     },
   })
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    localStorage.setItem('accessToken', token)
     if (content.length === 0 && files.length === 0) {
       alert('내용을 입력해주세요.')
       return
@@ -131,24 +128,24 @@ const Post = () => {
     })
   }
 
-    const replaceHashTagWithLink = (text: string, hashTags?: string[]) => {
-      if (!hashTags || hashTags.length === 0) {
-        return [text]
-      }
-  
-      const regex = new RegExp(`(${hashTags.join('|')})`, 'g')
-      const parts = text.split(regex)
-  
-      return parts.map((part, index) =>
-        regex.test(part) ? (
-          <Link href="/" key={index} className={cn.hashTag}>
-            {part}
-          </Link>
-        ) : (
-          part
-        )
-      )
+  const replaceHashTagWithLink = (text: string, hashTags?: string[]) => {
+    if (!hashTags || hashTags.length === 0) {
+      return [text]
     }
+
+    const regex = new RegExp(`(${hashTags.join('|')})`, 'g')
+    const parts = text.split(regex)
+
+    return parts.map((part, index) =>
+      regex.test(part) ? (
+        <Link href="/" key={index} className={cn.hashTag}>
+          {part}
+        </Link>
+      ) : (
+        part
+      )
+    )
+  }
   const renderedContent = replaceHashTagWithLink(content, hashArr)
 
   return (
