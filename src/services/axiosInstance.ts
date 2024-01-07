@@ -39,7 +39,7 @@ const responseInterceptor = (axiosInstance: AxiosInstance) => {
       if (error.response?.status === 401 && !isRefreshingToken) {
         isRefreshingToken = true
         try {
-          const res = await getAccessToken()
+          const res = await getAccessToken(axiosInstance)
           if (res.data) {
             localStorage.setItem('accessToken', res.data.accessToken)
           } else {
