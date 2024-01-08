@@ -40,7 +40,7 @@ const UserProfile: React.FC = () => {
             @{userCustomId}
           </Typography>
         </div>
-        <Link href={userCustomId}>
+        <Link href="/profile">
           <MoreIcon size="16" color="#C29DFF" />
         </Link>
       </div>

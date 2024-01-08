@@ -40,7 +40,12 @@ export default function Whisper(whisper: WhisperProps) {
         <Carousel PostImages={imageUrl} className={cn.imageArea} />
       )}
       <div className={cn.actionContainer}>
-        <Link href={`whispers/${whisperId}`}>
+        <Link
+          href={{
+            pathname: '/whispers/whisper',
+            query: { id: whisperId },
+          }}
+        >
           <LikeIcon isFilled={false} className={cn.icon} />
         </Link>
         <RepostIcon className={cn.icon} />
@@ -61,11 +66,9 @@ export default function Whisper(whisper: WhisperProps) {
           {comments.map((comment) => (
             <Comment key={comment.commentId} {...comment} />
           ))}
-          <Link href={`whispers/${whisperId}`}>
-            <Button variant="link" className="text-primary">
-              댓글 더 불러오기
-            </Button>
-          </Link>
+          <Button variant="link" className="text-primary">
+            댓글 더 불러오기
+          </Button>
         </div>
       )}
     </div>

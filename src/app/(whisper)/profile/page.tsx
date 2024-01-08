@@ -1,48 +1,31 @@
 'use client'
 
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate,
-  useQueryClient,
-} from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
+import Spinner from '@/components/atom/Spinner/Spinner'
 import Typography from '@/components/atom/Typography/Typography'
-
 import ProfileImg from '@/components/atom/ProfileImg/ProfileImg'
-import { UserProps } from '@/types'
-import cn from './page.module.scss'
+import { UserProps, WhisperProps } from '@/types'
 import WhispersList from '@/components/molecule/WhispersList/WhispersList'
+import cn from './page.module.scss'
 import { getUserWhispers } from '@/services/whisper'
-import LoginUser from '@/services/LoginUser'
 
-// export function generateStaticParams() {
-//   return [{ userCustomId: 'chopchop' }]
-// }
+export default function UserWhisperPage() {
+  const queryClient = useQueryClient()
+  const loginUserData: UserProps | undefined = queryClient.getQueryData([
+    'login-user',
+  ])
 
-export default function UserWhisperPage({
-  params,
-}: {
-  params: { userCustomId: string }
-}) {
- 
-  // const queryClient = new QueryClient()
-  // await queryClient.prefetchQuery({
-  //   queryKey: ['user-whispers'],
-  //   queryFn: () => getUserWhispers('1'),
-  // })
-  // const dehydratedState = dehydrate(queryClient)
-
-  // queryClient.getQueryData(['user-whispers'])
-
-  const loginUserData :UserProps | undefined = LoginUser()
+  const { data } = useQuery<WhisperProps[]>({
+    queryKey: ['user-whispers'],
+    queryFn: () => getUserWhispers(userId.toString()),
+  })
 
   if (!loginUserData) {
-    return null
+    return <Spinner />
   }
 
   const { userId, userCustomId, name, userProfileImageUrl } = loginUserData.user
-
   const { followingCount, followerCount } = loginUserData
 
   const followList = [
@@ -51,9 +34,9 @@ export default function UserWhisperPage({
     { count: followerCount, countLabel: '속삭임' },
     { count: followerCount, countLabel: '게시글' },
   ]
+
   return (
     <div className={cn.container}>
-      {/* <HydrationBoundary state={dehydratedState}> */}
       <div className={cn.topWrapper}>
         <div className={cn.fixedWrapper}>
           <div className={cn.titleArea}>
@@ -118,9 +101,8 @@ export default function UserWhisperPage({
         </div>
       </div>
       <div className={cn.whisperWrapper}>
-        <WhispersList userId={userId}/>
+        {data && <WhispersList whispers={data} />}
       </div>
-      {/* </HydrationBoundary> */}
     </div>
   )
 }
