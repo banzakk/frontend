@@ -4,54 +4,30 @@
 .container {
   display: flex;
   @include container();
-}
 
-.navSectionWrapper {
-  display: flex;
-  flex-grow: 1;
-  width: pxToRem(250);
-  border-right: 1px solid $secondary;
-}
+  .error {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-.navSection {
-  display: flex;
-  flex-direction: column;
-  width: pxToRem(250);
-  height: 100dvh;
-  margin: 0 auto;
-}
-
-.mainSectionWrapper {
-  width: pxToRem(680)
-}
-
-.rightSectionWrapper {
-  display: flex;
-  flex-grow: 1;
-  width: pxToRem(250);
-  border-left: 1px solid $secondary;
-}
-
-.error {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  h2 {
-    margin-top: 0.725rem;
-    margin-bottom: 0.5rem;
-    font-size: 2.5rem;
-  }
-  .status {
-    font-weight: bold;
-    font-size: 5rem;
-    color: $primary;
-  }
-  .link {
-    display: inline-block;
-    margin-top: 2rem;
-    color: $primary;
-    text-decoration-line: underline;
-    font-weight: 600;
+    h2 {
+      margin-top: 0.725rem;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+    }
+    
+    .status {
+      font-weight: bold;
+      font-size: 5rem;
+      color: $primary;
+    }
+    .link {
+      display: inline-block;
+      margin-top: 2rem;
+      color: $primary;
+      text-decoration-line: underline;
+      font-weight: 600;
+    }
   }
 }
