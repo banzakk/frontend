@@ -1,0 +1,50 @@
+@import '@/styles/colors';
+@import '@/styles/mixins';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+}
+
+.topWrapper {
+  width: pxToRem(680);
+  height: pxToRem(160);
+  background-color: $white;
+}
+
+.fixedWrapper {
+  position: fixed;
+  top: 0;
+  width: inherit;
+  height: inherit;
+  padding-top: pxToRem(30);
+  background-color: $white;
+  z-index: 2;
+}
+
+.titleArea {
+  // height: 149px;
+  margin-bottom: pxToRem(16);
+  padding: 0 pxToRem(26) pxToRem(16) pxToRem(26);
+}
+
+.title {
+  margin-bottom: pxToRem(16);
+}
+
+.subTitleArea {
+  margin: pxToRem(16) 0;
+  padding: pxToRem(12) 0;
+  border-top: 1px solid $secondary;
+  border-bottom: 1px solid $secondary;
+  text-align: center;
+}
+
+.whisperWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}

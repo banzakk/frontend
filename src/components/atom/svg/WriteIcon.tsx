@@ -1,10 +1,6 @@
-interface IconProps {
-  size?: string
-  color?: string
-  className?: string
-}
+import { IconSvgProps } from '.'
 
-const WriteIcon: React.FC<IconProps> = ({
+const WriteIcon: React.FC<IconSvgProps> = ({
   size,
   color = '#858585',
   className,

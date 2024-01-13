@@ -1,0 +1,52 @@
+@import '@/styles/colors';
+@import '@/styles/mixins';
+
+.container {
+  // min-height: pxToRem(488);
+  margin: pxToRem(16) 0;
+  padding: pxToRem(16);
+}
+
+.imageArea {
+  width: pxToRem(468);
+  height: pxToRem(350);
+  margin-bottom: pxToRem(16);
+  border-radius: pxToRem(30);
+  background-color: $secondary;
+}
+
+.actionContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: pxToRem(16);
+  padding: 0 pxToRem(16);
+}
+
+.contentContainer {
+  display: flex;
+  width: pxToRem(500);
+  padding: pxToRem(6);
+}
+
+.nickNameArea {
+  width: pxToRem(70);
+  margin-right: pxToRem(20);
+}
+
+.nickName {
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.contentArea {
+  width: 100%;
+}
+
+.icon {
+  margin-right: 6px;
+}
+
+.hashTag {
+  color: $primary;
+}

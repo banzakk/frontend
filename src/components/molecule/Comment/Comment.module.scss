@@ -1,0 +1,39 @@
+@import '@/styles/mixins';
+
+.commentArea {
+  display: flex;
+  align-items: flex-start;
+  max-width: pxToRem(450);
+  padding: pxToRem(10) 0;
+  margin-left: pxToRem(16);
+}
+
+.nickNameArea {
+  display: flex;
+  align-items: center;
+}
+
+.nickName {
+  width: pxToRem(60);
+  margin: 0 6px;
+  word-wrap: break-word;
+}
+
+.profile {
+  width: pxToRem(20);
+  height: pxToRem(20);
+}
+
+.contentArea {
+  width: 100%;
+}
+
+.actionContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 6px;
+}
+
+.icon {
+  margin-right: 6px;
+}
