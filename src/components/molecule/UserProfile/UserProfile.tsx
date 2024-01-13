@@ -4,32 +4,19 @@ import ProfileImg from '@/components/atom/ProfileImg/ProfileImg'
 import MoreIcon from '@/components/atom/svg/MoreIcon'
 import { UserProps } from '@/types/user'
 import cn from './UserProfile.module.scss'
-import { useQuery } from '@tanstack/react-query'
-import { getUserInfo } from '@/services/user'
 
-const UserProfile: React.FC = () => {
-  const { data } = useQuery<UserProps>({
-    queryKey: ['login-user'],
-    queryFn: getUserInfo,
-    staleTime: 1000 * 20,
-  })
-
-  if (!data) {
-    return null
-  }
-
-  const { userId, userCustomId, name, userProfileImageUrl } = data.user
-
-  const { followingCount, followerCount } = data
+const UserProfile  = ({ userData }: { userData: UserProps }) => {
+  const { followingCount, followerCount } = userData
+  const { userId, userCustomId, name, userProfileImageUrl } = userData.user
 
   return (
     <div className={cn.container}>
       <div className={cn.profileArea}>
-          <ProfileImg
-            src={userProfileImageUrl}
-            alt="프로필이미지"
-            className={cn.profile}
-          />
+        <ProfileImg
+          src={userProfileImageUrl}
+          alt="프로필이미지"
+          className={cn.profile}
+        />
       </div>
       <div className={cn.nameArea}>
         <div className={cn.nameInfo}>
