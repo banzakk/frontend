@@ -11,6 +11,7 @@ export interface CategoryType {
 
 export const CATEGORY: CategoryType[] = [
   { title: '홈', href: '/whispers', icon: <HomeIcon className="stroke" /> },
+  { title: '프로필', href: '/profile', icon: <AlertIcon /> },
   { title: '알림', href: '/notifications', icon: <AlertIcon /> },
   { title: '쪽지', href: '/messages', icon: <MessageIcon className="stroke"/> },
   { title: '설정', href: '/settings', icon: <SettingIcon className="stroke"/> },
