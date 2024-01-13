@@ -10,7 +10,7 @@
 
 .topWrapper {
   width: pxToRem(680);
-  height: pxToRem(240);
+  height: pxToRem(260);
   background-color: $white;
 }
 
@@ -26,7 +26,7 @@
 
 .titleArea {
   margin-bottom: pxToRem(16);
-  padding: 0 pxToRem(26) pxToRem(16) pxToRem(26);
+  padding: 0 pxToRem(26);
   background-color: $white;
 }
 
@@ -60,7 +60,8 @@
 }
 
 .content {
-  margin-bottom: pxToRem(16);
+  margin-top: pxToRem(10) ;
+  margin-bottom: pxToRem(16) ;
 }
 
 .followInfoArea {
