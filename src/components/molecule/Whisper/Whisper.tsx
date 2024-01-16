@@ -20,7 +20,7 @@ export default function Whisper(whisper: WhisperProps) {
       return [text]
     }
 
-    const regex = new RegExp(`(${hashTags.join('|')})`, 'g')
+    const regex = new RegExp(`(${hashTags.map(tag => `#${tag}`).join('|')})`, 'g');
     const parts = text.split(regex)
 
     return parts.map((part, index) =>
