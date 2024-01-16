@@ -1,12 +1,6 @@
 import cn from './layout.module.scss'
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) {
+export default function NotFound() {
   return (
     <div className={cn.container}>
       <div className={cn.error}>

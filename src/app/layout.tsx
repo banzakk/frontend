@@ -3,16 +3,13 @@
 import Providers from '@/states/server/Providers'
 import useTokenCheck from '@/hooks/useTokenCheck'
 import '@/styles/globals.scss'
-import SideBar from '@/components/molecule/SideBar/SideBar'
 import cn from './layout.module.scss'
 
 export default function RootLayout({
   children,
-  modal,
   auth,
 }: {
   children: React.ReactNode
-  modal: React.ReactNode
   auth: React.ReactNode
 }) {
   const isLoggedIn = useTokenCheck()
@@ -28,22 +25,7 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          {isLoggedIn ? (
-            <div className={cn.container}>
-              <header className={cn.navSectionWrapper}>
-                <section className={cn.navSection}>
-                  <SideBar />
-                </section>
-              </header>
-              <div className={cn.mainSectionWrapper}>{children}</div>
-              <div className={cn.rightSectionWrapper}>
-                <div className={cn.fixedWrapper}/>
-              </div>
-              {modal}
-            </div>
-          ) : (
-            auth
-          )}
+          {isLoggedIn ? <div className={cn.container}>{children}</div> : auth}
         </Providers>
       </body>
     </html>

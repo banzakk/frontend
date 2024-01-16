@@ -1,0 +1,33 @@
+@import '@/styles/colors';
+@import '@/styles/mixins';
+
+.container {
+  display: flex;
+  @include container();
+}
+
+.navSectionWrapper {
+  display: flex;
+  flex-grow: 1;
+  width: pxToRem(250);
+  border-right: 1px solid $secondary;
+}
+
+.navSection {
+  display: flex;
+  flex-direction: column;
+  width: pxToRem(250);
+  height: 100dvh;
+  margin: 0 auto;
+}
+
+.mainSectionWrapper {
+  width: pxToRem(680);
+}
+
+.rightSectionWrapper {
+  display: flex;
+  flex-grow: 1;
+  width: pxToRem(250);
+  border-left: 1px solid $secondary;
+}
