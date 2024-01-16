@@ -16,13 +16,18 @@
 }
 
 .actionContainer {
-  display: flex;
+  display:flex;
   justify-content: flex-end;
-  align-items: center;
   margin-bottom: pxToRem(16);
   padding: 0 pxToRem(16);
 }
 
+.actionGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: pxToRem(80);
+}
 .contentContainer {
   display: flex;
   width: pxToRem(500);
@@ -41,10 +46,6 @@
 
 .contentArea {
   width: 100%;
-}
-
-.icon {
-  margin-right: 6px;
 }
 
 .hashTag {

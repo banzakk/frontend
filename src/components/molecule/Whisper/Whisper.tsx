@@ -4,10 +4,10 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Typography from '@/components/atom/Typography/Typography'
 import Carousel from '../Carousel/Carousel'
-import LikeIcon from '@/components/atom/svg/LikeIcon'
 import RepostIcon from '@/components/atom/svg/RepostIcon'
 import ShareIcon from '@/components/atom/svg/ShareIcon'
 import Comment from '@/components/molecule/Comment/Comment'
+import Like from '../Like/Like'
 import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
 
@@ -20,7 +20,10 @@ export default function Whisper(whisper: WhisperProps) {
       return [text]
     }
 
-    const regex = new RegExp(`(${hashTags.map(tag => `#${tag}`).join('|')})`, 'g');
+    const regex = new RegExp(
+      `(${hashTags.map((tag) => `#${tag}`).join('|')})`,
+      'g'
+    )
     const parts = text.split(regex)
 
     return parts.map((part, index) =>
@@ -38,16 +41,11 @@ export default function Whisper(whisper: WhisperProps) {
     <div className={cn.container}>
       <Carousel PostImages={imageUrl} className={cn.imageArea} />
       <div className={cn.actionContainer}>
-        <Link
-          href={{
-            pathname: '/whispers/whisper',
-            query: { id: whisperId },
-          }}
-        >
-          <LikeIcon isFilled={false} className={cn.icon} />
-        </Link>
-        <RepostIcon className={cn.icon} />
-        <ShareIcon />
+        <div className={cn.actionGroup}>
+          <Like />
+          <RepostIcon className={cn.icon} />
+          <ShareIcon />
+        </div>
       </div>
       <div className={cn.contentContainer}>
         <div className={cn.nickNameArea}>
@@ -75,7 +73,7 @@ export default function Whisper(whisper: WhisperProps) {
           </Link>
         </Button>
       </div>
-      )} 
+      )}
     </div>
   )
 }
