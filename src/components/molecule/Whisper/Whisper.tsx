@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import Typography from '@/components/atom/Typography/Typography'
 import Carousel from '../Carousel/Carousel'
 import LikeIcon from '@/components/atom/svg/LikeIcon'
@@ -9,7 +10,6 @@ import ShareIcon from '@/components/atom/svg/ShareIcon'
 import Comment from '@/components/molecule/Comment/Comment'
 import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
-import Link from 'next/link'
 
 export default function Whisper(whisper: WhisperProps) {
   const { whisperId, nickName, imageUrl, content, hashTag, comments } = whisper
@@ -36,9 +36,7 @@ export default function Whisper(whisper: WhisperProps) {
   const renderedContent = replaceHashTagWithLink(content, hashTag)
   return (
     <div className={cn.container}>
-      {imageUrl.length > 0 && (
-        <Carousel PostImages={imageUrl} className={cn.imageArea} />
-      )}
+      <Carousel PostImages={imageUrl} className={cn.imageArea} />
       <div className={cn.actionContainer}>
         <Link
           href={{
@@ -62,15 +60,22 @@ export default function Whisper(whisper: WhisperProps) {
         </div>
       </div>
       {comments && comments.length > 0 && (
-        <div>
-          {comments.map((comment) => (
-            <Comment key={comment.commentId} {...comment} />
-          ))}
-          <Button variant="link" className="text-primary">
+      <div>
+        {comments.map((comment) => (
+          <Comment key={comment.commentId} {...comment} />
+        ))}
+        <Button variant="link" className="text-primary" asChild>
+          <Link
+            href={{
+              pathname: '/whispers/whisper',
+              query: { id: whisperId },
+            }}
+          >
             댓글 더 불러오기
-          </Button>
-        </div>
-      )}
+          </Link>
+        </Button>
+      </div>
+      )} 
     </div>
   )
 }
