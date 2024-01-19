@@ -29,9 +29,10 @@ export default function UserWhispers() {
   if (isLoading) {
     return <Spinner />
   }
-  
+
   const { followingCount, followerCount } = userData || {}
-  const { userCustomId, name, userProfileImageUrl } = userData?.user || {}
+  const { userCustomId, name, userProfileImageUrl, content } =
+    userData?.user || {}
 
   const followList = [
     { count: followingCount, countLabel: '팔로우' },
@@ -67,7 +68,7 @@ export default function UserWhispers() {
                     </Typography>
                   </div>
                   <div className={cn.content}>
-                    <Typography size="18">content</Typography>
+                    {content && <Typography size="18">{content}</Typography>}
                   </div>
                   <div className={cn.followInfoArea}>
                     {followList.map(({ count, countLabel }, index) => (

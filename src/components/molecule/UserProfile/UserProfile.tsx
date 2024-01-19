@@ -5,9 +5,10 @@ import MoreIcon from '@/components/atom/svg/MoreIcon'
 import { UserProps } from '@/types/user'
 import cn from './UserProfile.module.scss'
 
-const UserProfile  = ({ userData }: { userData: UserProps }) => {
+const UserProfile = ({ userData }: { userData: UserProps }) => {
   const { followingCount, followerCount } = userData
-  const { userId, userCustomId, name, userProfileImageUrl } = userData.user
+  const { userId, userCustomId, name, userProfileImageUrl, content } =
+    userData.user
 
   return (
     <div className={cn.container}>
@@ -31,9 +32,13 @@ const UserProfile  = ({ userData }: { userData: UserProps }) => {
           <MoreIcon size="16" color="#C29DFF" />
         </Link>
       </div>
-      <Typography size="14" className={cn.content}>
-        content
-      </Typography>
+      {content && (
+        <div className={cn.content}>
+          <Typography size="14">
+            {content}
+          </Typography>
+        </div>
+      )}
       <div className={cn.followContainer}>
         <div className={cn.label}>
           <Typography size="14" weight="600" className={cn.count}>

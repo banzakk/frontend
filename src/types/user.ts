@@ -10,4 +10,5 @@ export type User = {
   email: string
   userCustomId: string
   userProfileImageUrl: string
+  content?: string
 }
