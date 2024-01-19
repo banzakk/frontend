@@ -4,6 +4,7 @@ import {
   ChangeEventHandler,
   FormEvent,
   MouseEventHandler,
+  useEffect,
   useState,
 } from 'react'
 import { useMutation } from '@tanstack/react-query'
@@ -17,6 +18,16 @@ import { axiosInstance } from '@/services'
 import Link from 'next/link'
 
 const Post = () => {
+  const [bodyOverflow, setBodyOverflow] = useState('hidden')
+
+  useEffect(() => {
+    document.body.style.overflow = bodyOverflow
+
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [bodyOverflow])
+
   const [content, setContent] = useState('')
   const [hashArr, setHashArr] = useState<string[]>([])
   const [preview, setPreview] = useState<string[]>([])
