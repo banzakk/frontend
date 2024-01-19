@@ -4,15 +4,25 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Typography from '@/components/atom/Typography/Typography'
 import Carousel from '../Carousel/Carousel'
+import CommentIcon from '@/components/atom/svg/CommentIcon'
 import RepostIcon from '@/components/atom/svg/RepostIcon'
 import ShareIcon from '@/components/atom/svg/ShareIcon'
 import Comment from '@/components/molecule/Comment/Comment'
-import Like from '../Like/Like'
+import LikeButton from '@/components/molecule/LikeButton/LikeButton'
+import DeleteButton from '@/components/molecule/DeleteButton/DeleteButton'
 import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
 
 export default function Whisper(whisper: WhisperProps) {
-  const { whisperId, nickName, imageUrl, content, hashTag, comments } = whisper
+  const {
+    whisperId,
+    nickName,
+    imageUrl,
+    content,
+    hashTag,
+    comments,
+    isMyWhisper,
+  } = whisper
 
   // 해시태그 css 변경
   const replaceHashTagWithLink = (text: string, hashTags?: string[]) => {
@@ -42,9 +52,11 @@ export default function Whisper(whisper: WhisperProps) {
       <Carousel PostImages={imageUrl} className={cn.imageArea} />
       <div className={cn.actionContainer}>
         <div className={cn.actionGroup}>
-          <Like />
+          <CommentIcon className={cn.icon} />
+          <LikeButton className={cn.icon} />
           <RepostIcon className={cn.icon} />
-          <ShareIcon />
+          <ShareIcon className={cn.icon} />
+          {isMyWhisper === '1' && <DeleteButton className={cn.icon} />}
         </div>
       </div>
       <div className={cn.contentContainer}>

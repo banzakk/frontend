@@ -5,6 +5,7 @@ export type WhisperProps = {
   content: string
   comments?: CommentProps[]
   hashTag?: string[]
+  isMyWhisper?: string
 }
 
 export type CommentProps = {
