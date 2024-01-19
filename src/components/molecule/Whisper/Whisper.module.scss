@@ -24,9 +24,7 @@
 
 .actionGroup {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: pxToRem(120);
 }
 .contentContainer {
   display: flex;
@@ -55,4 +53,5 @@
 
 .icon {
   cursor:pointer;
+  margin-right: pxToRem(5);
 }
