@@ -1,6 +1,6 @@
 'use client'
 
-import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import Spinner from '@/components/atom/Spinner/Spinner'
 import Typography from '@/components/atom/Typography/Typography'
@@ -20,7 +20,7 @@ export default function UserWhispers() {
   })
 
   const { data: userWhispers } = useQuery<WhisperProps[]>({
-    queryKey: ['user', 'timeline'],
+    queryKey: ['user', 'user-timeline'],
     queryFn: () =>
       getUserWhispers(userData?.user?.userId?.toString() as string),
     enabled: !!userData,

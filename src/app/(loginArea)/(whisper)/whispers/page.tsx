@@ -1,6 +1,6 @@
 import Typography from '@/components/atom/Typography/Typography'
-import WhispersList from '@/components/molecule/WhispersList/WhispersList'
 import cn from './page.module.scss'
+import TimeLineWhispers from '@/components/molecule/TimeLineWhispers/TimeLineWhispers'
 
 export default async function WhispersPage() {
   return (
@@ -23,7 +23,7 @@ export default async function WhispersPage() {
       </div>
 
       <div className={cn.whisperWrapper}>
-        <WhispersList userId={1} />
+        <TimeLineWhispers />
       </div>
     </div>
   )

@@ -8,3 +8,9 @@ export async function getUserWhispers(userId: string): Promise<WhisperProps[]> {
   const res: AxiosResponse<WhisperProps[]> = await axios.get(`/users/${userId}/whispers`)
   return res.data
 }
+
+
+export async function getTimeLineWhispers(userId: string): Promise<WhisperProps[]> {
+  const res: AxiosResponse<WhisperProps[]> = await axios.get(`/users/${userId}/whispers`)
+  return res.data
+}
