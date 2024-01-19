@@ -56,10 +56,14 @@ const Post = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (content.length === 0 && files.length === 0) {
+    if (content.length === 0) {
       alert('내용을 입력해주세요.')
       return
+    } else if (files.length === 0) {
+      alert('사진을 첨부해주세요.')
+      return
     }
+
     const formData = new FormData()
     formData.append('content', content)
     files.forEach((file) => formData.append('image', file))
