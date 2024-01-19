@@ -1,10 +1,14 @@
-import SocialLoginConsumer from '@/components/SocialLoginConsumer'
+// import SocialLoginConsumer from '@/components/SocialLoginConsumer'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: 'Banzakk',
-  icons: { icon: 'http://localhost:3000/favicon.ico' },
+  description:
+    '반려동물과 함께하는 사람들을 위한 일상, 정보 공유 커뮤니티 서비스',
+  icons: {
+    icon: '/icon.ico',
+  },
 }
 
 export default function Page() {
