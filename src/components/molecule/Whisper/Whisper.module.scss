@@ -16,7 +16,7 @@
 }
 
 .actionContainer {
-  display:flex;
+  display: flex;
   justify-content: flex-end;
   margin-bottom: pxToRem(16);
   padding: 0 pxToRem(16);
@@ -50,8 +50,24 @@
   color: $primary;
 }
 
-
 .icon {
-  cursor:pointer;
+  cursor: pointer;
   margin-right: pxToRem(5);
+}
+
+.commentPostArea {
+  margin-top: pxToRem(18);
+}
+
+.commentPost {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: pxToRem(10) pxToRem(34);
+  border-radius: 25px;
+  color: $gray-strong;
+  background-color: $secondary;
+  &:focus {
+    outline: none;
+  }
 }
