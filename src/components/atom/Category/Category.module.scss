@@ -9,14 +9,25 @@
 
   svg {
     margin-right: 20px;
-    fill: currentColor;
-
-    &[class*='stroke'] {
+    &[class*='home'] {
+      fill: currentColor;
+      stroke: currentColor;
+    }
+    &[class*='message'] {
       fill: none;
-
-      path {
-        stroke: currentColor;
-      }
+      stroke: currentColor;
+    }
+    &[class*='alert'] {
+      fill: currentColor;
+      stroke: none;
+    }
+    &[class*='setting'] {
+      fill: none;
+      stroke: currentColor;
+    }
+    &[class*='theme'] {
+      fill: currentColor;
+      stroke: none;
     }
   }
 }
