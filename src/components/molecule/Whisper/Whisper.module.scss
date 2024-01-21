@@ -52,7 +52,11 @@
 
 .icon {
   cursor: pointer;
-  margin-right: pxToRem(5);
+  margin-right: pxToRem(12);
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .commentPostArea {
@@ -67,6 +71,7 @@
   border-radius: 25px;
   color: $gray-strong;
   background-color: $secondary;
+  
   &:focus {
     outline: none;
   }
