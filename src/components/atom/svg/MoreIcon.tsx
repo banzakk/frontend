@@ -1,6 +1,6 @@
 import { IconSvgProps } from '.'
 
-const MoreIcon: React.FC<IconSvgProps> = ({ size, color, className }) => {
+const MoreIcon: React.FC<IconSvgProps> = ({ size = "16", color="#C29DFF", className }) => {
   return (
     <svg
       className={className}
