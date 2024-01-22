@@ -3,7 +3,6 @@
 .commentArea {
   display: flex;
   align-items: flex-start;
-  max-width: pxToRem(450);
   padding: pxToRem(10) 0;
   margin-left: pxToRem(16);
 }
@@ -24,16 +23,26 @@
   height: pxToRem(20);
 }
 
-.contentArea {
+.contentGroup {
+  display:flex;
+  position: relative;
   width: 100%;
+}
+.contentArea {
+  width: pxToRem(218);
 }
 
 .actionContainer {
+  position:absolute;
+  right: 0;
+  bottom: 0;
   display: flex;
-  align-items: center;
-  margin-left: 6px;
 }
 
 .icon {
-  margin-right: 6px;
+  margin-right: 4px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
