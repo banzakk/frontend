@@ -1,9 +1,8 @@
 'use client'
 
-import Whisper from '@/components/molecule/Whisper/Whisper'
 import { useSearchParams } from 'next/navigation'
+import DetailWhisper from '@/components/molecule/DetailWhisper/DetailWhisper'
 import cn from './page.module.scss'
-import Typography from '@/components/atom/Typography/Typography'
 
 export default function Page() {
   const params = useSearchParams()
@@ -22,20 +21,10 @@ export default function Page() {
   }
 
   return (
-    <div className={cn.container}>
-      <div className={cn.topWrapper}>
-        <div className={cn.fixedWrapper}>
-          <div className={cn.titleArea}>
-            <div className={cn.title}>
-              <Typography size="24" weight="800">
-                상세
-              </Typography>
-            </div>
-          </div>
-        </div>
+    <div className={cn.modalBackground}>
+      <div className={cn.container}>
+        <DetailWhisper {...testData} />
       </div>
-      <Whisper {...testData} />
-      My Post: {whisperId}
     </div>
   )
 }
