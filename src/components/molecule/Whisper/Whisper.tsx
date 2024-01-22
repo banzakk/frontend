@@ -14,6 +14,8 @@ import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
 import CommentIcon from '@/components/atom/svg/CommentIcon'
 import { useRouter } from 'next/navigation'
+import SendIcon from '@/components/atom/svg/SendIcon'
+import { LineBreakContent, replaceHashTagWithLink } from '@/utils/whisperContext'
 
 export default function Whisper(whisper: WhisperProps) {
   const [isComment, setIsComment] = useState(false)
@@ -31,34 +33,14 @@ export default function Whisper(whisper: WhisperProps) {
     isMyWhisper,
   } = whisper
 
-  // 해시태그 css 변경
-  const replaceHashTagWithLink = (text: string, hashTags?: string[]) => {
-    if (!hashTags || hashTags.length === 0) {
-      return [text]
-    }
 
-    const regex = new RegExp(
-      `(${hashTags.map((tag) => `#${tag}`).join('|')})`,
-      'g'
-    )
-    const parts = text.split(regex)
+  const whisperContent = replaceHashTagWithLink(content, cn.hashTag, hashTag)
 
-    return parts.map((part, index) =>
-      regex.test(part) ? (
-        <Link href="/" key={index} className={cn.hashTag}>
-          {part}
-        </Link>
-      ) : (
-        part
-      )
-    )
-  }
-  const renderedContent = replaceHashTagWithLink(content, hashTag)
   const router = useRouter()
-
   const handleNavigate = () => {
     router.push(`/whispers/whisper?id=${whisperId}`)
   }
+
 
   return (
     <div className={cn.container}>
@@ -87,29 +69,32 @@ export default function Whisper(whisper: WhisperProps) {
             </Typography>
           </div>
           <div className={cn.contentArea}>
-            <Typography size="14">{renderedContent}</Typography>
+            {content && <Typography type="div" size="14"><LineBreakContent content={whisperContent}/></Typography>}
           </div>
         </div>
-        {comments && comments.length > 0 && (
-          <div>
-            {comments.map((comment) => (
-              <Comment key={comment.commentId} {...comment} />
-            ))}
-            <Button variant="link" className="text-primary" asChild>
-              <Link
-                href={{
-                  pathname: '/whispers/whisper',
-                  query: { id: whisperId },
-                }}
-              >
-                댓글 더 불러오기
-              </Link>
-            </Button>
-          </div>
-        )}
+        <div>
+          {comments?.map((comment) => (
+            <Comment key={comment.commentId} comment={comment} />
+          ))}
+          <Button variant="link" className="text-primary" asChild>
+            <Link
+              href={{
+                pathname: '/whispers/whisper',
+                query: { id: whisperId },
+              }}
+            >
+              댓글 더 불러오기
+            </Link>
+          </Button>
+        </div>
       </div>
       <div className={cn.commentPostArea}>
-        {isComment && <input className={cn.commentPost}/> }
+        {isComment && (
+          <div className={cn.commentPost}>
+            <input className={cn.commentInput} />
+            <SendIcon />
+          </div>
+        )}
       </div>
     </div>
   )
