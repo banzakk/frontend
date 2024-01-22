@@ -1,0 +1,107 @@
+@import '@/styles/colors';
+@import '@/styles/mixins';
+
+.container {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: pxToRem(950);
+  height: pxToRem(526);
+  border-radius: 10px;
+  background-color: $white;
+}
+
+.imageArea {
+  width: pxToRem(526);
+  height: pxToRem(526);
+  border-radius: 10px 0 0 10px;
+  background-color: $black;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  padding: pxToRem(22);
+  height: pxToRem(526);
+}
+
+.detailContent {
+  display:flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.contentGroup {
+  display: flex;
+  margin-bottom: pxToRem(4);
+}
+
+.actionContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.actionGroup {
+  display: flex;
+  align-items: center;
+}
+
+.nickNameArea {
+  width: pxToRem(70);
+  margin-right: pxToRem(20);
+}
+
+.nickName {
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.contentArea {
+  width: 100%;
+}
+
+.hashTag {
+  color: $primary;
+}
+
+.icon {
+  cursor: pointer;
+  margin-right: pxToRem(12);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.moreIconArea {
+  display: flex;
+  justify-content: center;
+  margin: pxToRem(12) 0;
+}
+
+.commentPostArea {
+  width: 100%;
+  background-color: $white;
+}
+
+.commentPost {
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+  color: $gray-strong;
+  background-color: $secondary-light;
+}
+
+.commentInput {
+  width: 100%;
+  background-color: $secondary-light;
+  &:focus {
+    outline: none;
+  }
+}
