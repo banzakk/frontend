@@ -2,16 +2,18 @@
 
 import Typography from '@/components/atom/Typography/Typography'
 import Carousel from '../Carousel/Carousel'
-import RepostIcon from '@/components/atom/svg/RepostIcon'
-import ShareIcon from '@/components/atom/svg/ShareIcon'
+import {
+  RepostIcon,
+  ShareIcon,
+  CommentIcon,
+  SendIcon,
+  MoreIcon,
+} from '@/components/atom/svg'
 import Comment from '@/components/molecule/Comment/Comment'
 import LikeButton from '@/components/molecule/LikeButton/LikeButton'
 import DeleteButton from '@/components/molecule/DeleteButton/DeleteButton'
 import { WhisperProps } from '@/types'
 import cn from './DetailWhisper.module.scss'
-import CommentIcon from '@/components/atom/svg/CommentIcon'
-import SendIcon from '@/components/atom/svg/SendIcon'
-import MoreIcon from '@/components/atom/svg/MoreIcon'
 import UploadImg from '../UploadImg/UploadImg'
 import {
   LineBreakContent,

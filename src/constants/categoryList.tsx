@@ -1,8 +1,10 @@
-import HomeIcon from '@/components/atom/svg/HomeIcon'
-// import AlertIcon from '@/components/atom/svg/AlertIcon'
-// import MessageIcon from '@/components/atom/svg/MessageIcon'
-// import SettingIcon from '@/components/atom/svg/SettingIcon'
-import ThemeIcon from '@/components/atom/svg/ThemeIcon'
+import {
+  HomeIcon,
+  ThemeIcon,
+  AlertIcon,
+  MessageIcon,
+  SettingIcon,
+} from '@/components/atom/svg'
 
 export interface CategoryType {
   title: string

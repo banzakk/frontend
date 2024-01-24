@@ -4,17 +4,20 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Typography from '@/components/atom/Typography/Typography'
+import {
+  RepostIcon,
+  ShareIcon,
+  CommentIcon,
+  SendIcon,
+  DeleteIcon,
+} from '@/components/atom/svg'
 import Carousel from '../Carousel/Carousel'
-import RepostIcon from '@/components/atom/svg/RepostIcon'
-import ShareIcon from '@/components/atom/svg/ShareIcon'
 import Comment from '@/components/molecule/Comment/Comment'
 import LikeButton from '@/components/molecule/LikeButton/LikeButton'
 import DeleteButton from '@/components/molecule/DeleteButton/DeleteButton'
 import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
-import CommentIcon from '@/components/atom/svg/CommentIcon'
 import { useRouter } from 'next/navigation'
-import SendIcon from '@/components/atom/svg/SendIcon'
 import { LineBreakContent, replaceHashTagWithLink } from '@/utils/whisperContext'
 
 export default function Whisper(whisper: WhisperProps) {
