@@ -1,17 +1,27 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
+import { Fragment, useEffect } from 'react'
+import { InfiniteData, useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
-import Spinner from '@/components/atom/Spinner/Spinner'
-import Typography from '@/components/atom/Typography/Typography'
-import ProfileImg from '@/components/atom/ProfileImg/ProfileImg'
-import { UserProps, WhisperProps } from '@/types'
-import WhispersList from '@/components/molecule/WhispersList/WhispersList'
-import cn from './UserWhispers.module.scss'
-import { getUserWhispers } from '@/services/whisper'
+import { useInView } from 'react-intersection-observer'
 import { getUserInfo } from '@/services/user'
+import { getUserWhispers } from '@/services/whisper'
+import Typography from '@/components/atom/Typography/Typography'
+import Spinner from '@/components/atom/Spinner/Spinner'
+import ProfileImg from '@/components/atom/ProfileImg/ProfileImg'
+import Whisper from '../Whisper/Whisper'
+import { TimelineData, UserProps, WhisperProps } from '@/types'
+import cn from './UserWhispers.module.scss'
 
 export default function UserWhispers() {
+  const [ref, inView] = useInView({ threshold: 0 })
+
+  useEffect(() => {
+    if (inView) {
+      !isFetching && hasNextPage && fetchNextPage()
+    }
+  }, [inView])
+
   const { data: userData, isLoading } = useQuery<UserProps>({
     queryKey: ['user', 'loginUser'],
     queryFn: getUserInfo,
@@ -19,10 +29,32 @@ export default function UserWhispers() {
     gcTime: 300 * 1000,
   })
 
-  const { data: userWhispers } = useQuery<WhisperProps[]>({
-    queryKey: ['user', 'user-timeline'],
-    queryFn: () =>
-      getUserWhispers(userData?.user?.userId?.toString() as string),
+  let userId = ''
+  if (userData) {
+    userId = userData.user.userId.toString()
+  }
+
+  const {
+    data: userWhispersData,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+  } = useInfiniteQuery<
+    TimelineData,
+    Object,
+    InfiniteData<TimelineData>,
+    [_1: string, _2: string],
+    number
+  >({
+    queryKey: ['whispers', 'follow-timeline'],
+    queryFn: ({ pageParam }) => getUserWhispers(userId, pageParam),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+      if (lastPage?.data.length === 0) {
+        return undefined
+      }
+      return lastPageParam + 1
+    },
     enabled: !!userData,
   })
 
@@ -51,13 +83,15 @@ export default function UserWhispers() {
             </div>
             <div className={cn.profileContainer}>
               <div className={cn.profileArea}>
-                {userProfileImageUrl && (
-                  <ProfileImg
-                    src={userProfileImageUrl}
-                    alt="프로필이미지"
-                    className={cn.profile}
-                  />
-                )}
+                <div>
+                  {userProfileImageUrl && (
+                    <ProfileImg
+                      src={userProfileImageUrl}
+                      alt="프로필이미지"
+                      className={cn.profile}
+                    />
+                  )}
+                </div>
                 <div className={cn.contentArea}>
                   <div className={cn.nickNameArea}>
                     <Typography size="24" weight="600" className={cn.nickName}>
@@ -107,8 +141,19 @@ export default function UserWhispers() {
         </div>
       </div>
       <div className={cn.whisperWrapper}>
-        {userWhispers && <WhispersList whispers={userWhispers} />}
+      {userWhispersData?.pages.map(
+        (page: { data: WhisperProps[] }, pageIndex: number) => (
+          <Fragment key={pageIndex}>
+            {page.data.map((whisper, whisperIndex) => (
+              <Fragment key={whisperIndex}>
+                <Whisper {...whisper} />
+              </Fragment>
+            ))}
+          </Fragment>
+        )
+      )}
       </div>
+      <div ref={ref} style={{ height: 50 }}></div>
     </div>
   )
 }

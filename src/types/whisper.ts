@@ -13,4 +13,10 @@ export type CommentProps = {
   nickName: string,
   profileUrl: string,
   content: string
+  isMyComment?: string
 }
+
+export type TimelineData = {
+  currentPage: number;
+  data: WhisperProps[];
+};
