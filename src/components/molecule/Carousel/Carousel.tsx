@@ -19,8 +19,8 @@ const Carousel: React.FC<CarouselProps> = ({ PostImages, className }) => {
     >
       {PostImages.length > 0 && (
         <>
-          {PostImages.map((imgUrl) => (
-            <SwiperSlide key={imgUrl}>
+          {PostImages.map((imgUrl, index) => (
+            <SwiperSlide key={index}>
               <img src={imgUrl} alt="whisperImages" />
             </SwiperSlide>
           ))}
