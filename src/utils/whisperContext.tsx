@@ -27,24 +27,3 @@ export const replaceHashTagWithLink = (
     )
   )
 }
-
-// 줄바꿈 처리
-interface LineBreakContentProps {
-  content: (string | JSX.Element)[]
-}
-
-export const LineBreakContent: React.FC<LineBreakContentProps> = ({
-  content,
-}) =>
-  (Array.isArray(content) ? content : [content]).map((item, index) => (
-    <React.Fragment key={index}>
-      {typeof item === 'string'
-        ? item.split('\n').map((line, lineIndex) => (
-            <span key={lineIndex}>
-              {line}
-              <br />
-            </span>
-          ))
-        : item}
-    </React.Fragment>
-  ))

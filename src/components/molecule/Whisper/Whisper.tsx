@@ -72,7 +72,11 @@ export default function Whisper(whisper: WhisperProps) {
             </Typography>
           </div>
           <div className={cn.contentArea}>
-            {content && <Typography type="div" size="14"><LineBreakContent content={whisperContent}/></Typography>}
+            {content && (
+              <Typography type="div" size="14" className={cn.content}>
+                {whisperContent}
+              </Typography>
+            )}
           </div>
         </div>
         <div>

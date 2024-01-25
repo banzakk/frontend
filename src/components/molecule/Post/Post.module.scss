@@ -50,7 +50,8 @@
 .contentArea {
   position: absolute;
   top: 0;
-  white-space: pre-line;
+  white-space: pre;
+  word-break: break-all;
 }
 
 .fileIcon {

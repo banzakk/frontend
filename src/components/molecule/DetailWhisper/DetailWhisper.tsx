@@ -16,7 +16,6 @@ import { WhisperProps } from '@/types'
 import cn from './DetailWhisper.module.scss'
 import UploadImg from '../UploadImg/UploadImg'
 import {
-  LineBreakContent,
   replaceHashTagWithLink,
 } from '@/utils/whisperContext'
 
@@ -54,8 +53,8 @@ export default function DetailWhisper(whisper: WhisperProps) {
             <div className={cn.contentArea}>
               <Typography type="div" size="14">
                 {content && (
-                  <Typography type="div" size="14">
-                    <LineBreakContent content={whisperContent} />
+                  <Typography type="div" size="14" className={cn.content}>
+                     {whisperContent}
                   </Typography>
                 )}
               </Typography>
@@ -69,7 +68,7 @@ export default function DetailWhisper(whisper: WhisperProps) {
               <LikeButton className={cn.icon} />
               <RepostIcon className={cn.icon} />
               <ShareIcon className={cn.icon} />
-              {isMyWhisper === '1' && <DeleteButton className={cn.icon} />}
+              {isMyWhisper === 1 && <DeleteButton className={cn.icon} />}
             </div>
           </div>
           <div className={cn.commentContainer}>
