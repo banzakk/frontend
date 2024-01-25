@@ -14,8 +14,6 @@ const useTokenCheck = () => {
     } else {
       setIsActive(false)
     }
-    console.log(isActive)
-    console.log(token)
   }, [pathname])
   return isActive
 }
