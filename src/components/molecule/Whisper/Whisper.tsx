@@ -86,7 +86,7 @@ export default function Whisper(whisper: WhisperProps) {
           <Button variant="link" className="text-primary" asChild>
             <Link
               href={{
-                pathname: '/whispers/whisper',
+                pathname: '/whisper',
                 query: { id: whisperId },
               }}
             >
