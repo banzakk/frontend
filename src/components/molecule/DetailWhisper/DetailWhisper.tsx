@@ -6,7 +6,6 @@ import { useQuery } from '@tanstack/react-query'
 import { getDetailWhisper } from '@/services/whisper'
 import {
   RepostIcon,
-  ShareIcon,
   CommentIcon,
   SendIcon,
   MoreIcon,
@@ -21,11 +20,11 @@ import cn from './DetailWhisper.module.scss'
 import Spinner from '@/components/atom/Spinner/Spinner'
 import { MouseEventHandler } from 'react'
 import { useRouter } from 'next/navigation'
-
+import ShareButton from '../ShareButton/ShareButton'
 
 export default function DetailWhisper({ whisperId }: { whisperId: string }) {
-  const router = useRouter();
-  
+  const router = useRouter()
+
   const { data: whisperData, isLoading } = useQuery<WhisperProps>({
     queryKey: ['whisper', 'detailWhisper'],
     queryFn: () => getDetailWhisper(whisperId),
@@ -40,15 +39,18 @@ export default function DetailWhisper({ whisperId }: { whisperId: string }) {
 
   const whisperContent = replaceHashTagWithLink(cn.hsahTag, content, hashTag)
 
-
-  const handleClose: MouseEventHandler<HTMLButtonElement | HTMLDivElement> = (
-  ) => {
-      router.back()
+  const handleClose: MouseEventHandler<
+    HTMLButtonElement | HTMLDivElement
+  > = () => {
+    router.back()
   }
 
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
   }
+
+  const whisperLink = `${window.location.host}/whisper?id=${whisperId}`
+
   return (
     <div className={cn.modalBackground} onClick={handleClose}>
       <div className={cn.container} onClick={handleModalClick}>
@@ -87,7 +89,7 @@ export default function DetailWhisper({ whisperId }: { whisperId: string }) {
                 </div>
                 <LikeButton className={cn.icon} liked={liked} />
                 <RepostIcon className={cn.icon} />
-                <ShareIcon className={cn.icon} />
+                <ShareButton className={cn.icon} text={whisperLink} />
                 {isMyWhisper === 1 && <DeleteButton className={cn.icon} />}
               </div>
             </div>

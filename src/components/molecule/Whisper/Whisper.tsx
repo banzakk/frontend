@@ -7,7 +7,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Typography from '@/components/atom/Typography/Typography'
 import {
   RepostIcon,
-  ShareIcon,
   CommentIcon,
   SendIcon,
   DeleteIcon,
@@ -15,6 +14,7 @@ import {
 import Carousel from '../Carousel/Carousel'
 import Comment from '@/components/molecule/Comment/Comment'
 import LikeButton from '@/components/molecule/LikeButton/LikeButton'
+import ShareButton from '@/components/molecule/ShareButton/ShareButton'
 import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
 import {
@@ -52,6 +52,8 @@ export default function Whisper(whisper: WhisperProps) {
     mutation.mutate(whisperId.toString())
   }
 
+  const whisperLink = `${window.location.host}/whisper?id=${whisperId}`
+
   return (
     <div className={cn.container}>
       <div className={cn.linkArea}>
@@ -63,7 +65,7 @@ export default function Whisper(whisper: WhisperProps) {
             </div>
             <LikeButton className={cn.icon} />
             <RepostIcon className={cn.icon} />
-            <ShareIcon className={cn.icon} />
+           <ShareButton className={cn.icon} text={whisperLink}/>
             {isMyWhisper === 1 && (
               <div onClick={handleDelete}>
                 <DeleteIcon width="15" height="21" className={cn.icon} />
