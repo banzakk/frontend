@@ -17,7 +17,6 @@ import LikeButton from '@/components/molecule/LikeButton/LikeButton'
 import DeleteButton from '@/components/molecule/DeleteButton/DeleteButton'
 import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
-import { LineBreakContent, replaceHashTagWithLink } from '@/utils/whisperContext'
 
 export default function Whisper(whisper: WhisperProps) {
   const [isComment, setIsComment] = useState(false)
@@ -35,8 +34,8 @@ export default function Whisper(whisper: WhisperProps) {
     isMyWhisper,
   } = whisper
 
+  const whisperContent = replaceHashTagWithLink(cn.hashTag, content, hashTag)
 
-  const whisperContent = replaceHashTagWithLink(content, cn.hashTag, hashTag)
 
   }
 

@@ -3,12 +3,16 @@ import React from 'react'
 
 // 해시태그 처리
 export const replaceHashTagWithLink = (
-  text: string,
   className: string,
+  text?: string,
   hashTags?: string[]
 ) => {
   if (!hashTags || hashTags.length === 0) {
     return [text]
+  }
+
+  if (!text) {
+    return null
   }
 
   const regex = new RegExp(
