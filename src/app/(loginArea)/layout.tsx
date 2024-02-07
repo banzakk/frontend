@@ -1,12 +1,14 @@
-import SideBar from "@/components/molecule/SideBar/SideBar"
+import SideBar from '@/components/molecule/SideBar/SideBar'
 import cn from './layout.module.scss'
 
 export default function MainLayout({
   children,
-  modal
+  modal,
+  whisper,
 }: {
   children: React.ReactNode
   modal: React.ReactNode
+  whisper: React.ReactNode
 }) {
   return (
     <div className={cn.container}>
@@ -20,6 +22,7 @@ export default function MainLayout({
         <div className={cn.fixedWrapper} />
       </div>
       {modal}
+      {whisper}
     </div>
   )
 }
