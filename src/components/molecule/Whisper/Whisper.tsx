@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Typography from '@/components/atom/Typography/Typography'
 import {
   RepostIcon,
@@ -14,9 +15,12 @@ import {
 import Carousel from '../Carousel/Carousel'
 import Comment from '@/components/molecule/Comment/Comment'
 import LikeButton from '@/components/molecule/LikeButton/LikeButton'
-import DeleteButton from '@/components/molecule/DeleteButton/DeleteButton'
 import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
+import {
+  replaceHashTagWithLink,
+} from '@/utils/whisperContext'
+import { deleteWhisper } from '@/services/whisper'
 
 export default function Whisper(whisper: WhisperProps) {
   const [isComment, setIsComment] = useState(false)
@@ -36,7 +40,16 @@ export default function Whisper(whisper: WhisperProps) {
 
   const whisperContent = replaceHashTagWithLink(cn.hashTag, content, hashTag)
 
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn: (whisperId: string) => deleteWhisper(whisperId),
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ['whispers'] })
+    },
+  })
 
+  const handleDelete = () => {
+    mutation.mutate(whisperId.toString())
   }
 
   return (
@@ -51,7 +64,11 @@ export default function Whisper(whisper: WhisperProps) {
             <LikeButton className={cn.icon} />
             <RepostIcon className={cn.icon} />
             <ShareIcon className={cn.icon} />
-            {isMyWhisper === '1' && <DeleteButton className={cn.icon} />}
+            {isMyWhisper === 1 && (
+              <div onClick={handleDelete}>
+                <DeleteIcon width="15" height="21" className={cn.icon} />
+              </div>
+            )}
           </div>
         </div>
         <div className={cn.contentContainer}>
