@@ -17,3 +17,8 @@ export async function getTimeLineWhispers(userId: string, pageParam? : number): 
   const res: AxiosResponse<TimelineData> = await axios.get(`/users/${userId}/timeline?page=${pageParam}&limit=10`)
   return res.data
 }
+
+export async function getDetailWhisper(whisperId: string): Promise<WhisperProps> {
+  const res: AxiosResponse<WhisperProps[]> = await axios.get(`/whispers/${whisperId}`)
+  return res.data[0]
+}
