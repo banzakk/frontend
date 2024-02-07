@@ -17,7 +17,6 @@ import LikeButton from '@/components/molecule/LikeButton/LikeButton'
 import DeleteButton from '@/components/molecule/DeleteButton/DeleteButton'
 import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
-import { useRouter } from 'next/navigation'
 import { LineBreakContent, replaceHashTagWithLink } from '@/utils/whisperContext'
 
 export default function Whisper(whisper: WhisperProps) {
@@ -39,15 +38,11 @@ export default function Whisper(whisper: WhisperProps) {
 
   const whisperContent = replaceHashTagWithLink(content, cn.hashTag, hashTag)
 
-  const router = useRouter()
-  const handleNavigate = () => {
-    router.push(`/whispers/whisper?id=${whisperId}`)
   }
-
 
   return (
     <div className={cn.container}>
-      <div className={cn.linkArea} onClick={handleNavigate}>
+      <div className={cn.linkArea}>
         <Carousel PostImages={imageUrl} className={cn.imageArea} />
         <div className={cn.actionContainer}>
           <div className={cn.actionGroup}>
