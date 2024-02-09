@@ -18,7 +18,6 @@ import useModalClose from '@/hooks/useModalClose'
 import { WhisperProps } from '@/types'
 import UploadImg from '../UploadImg/UploadImg'
 import { replaceHashTagWithLink } from '@/utils/whisperContext'
-import Spinner from '@/components/atom/Spinner/Spinner'
 import ShareButton from '../ShareButton/ShareButton'
 import cn from './DetailWhisper.module.scss'
 
@@ -30,10 +29,6 @@ export default function DetailWhisper({ whisperId }: { whisperId: string }) {
     queryKey: ['whisper', 'detailWhisper'],
     queryFn: () => getDetailWhisper(whisperId),
   })
-
-  if (isLoading) {
-    return <Spinner />
-  }
 
   const { nickName, imageUrl, content, hashTag, isMyWhisper, comments, liked } =
     whisperData || {}
