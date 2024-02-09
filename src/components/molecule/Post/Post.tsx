@@ -7,11 +7,11 @@ import TextareaAutosize from 'react-textarea-autosize'
 import UploadImg from '../UploadImg/UploadImg'
 import CloseIcon from '@/components/atom/svg/CloseIcon'
 import { Button } from '@/components/ui/button'
-import cn from './Post.module.scss'
 import { axiosInstance } from '@/services'
-import Link from 'next/link'
 import useModalScrollRemove from '@/hooks/useModalScrollRemove'
 import useModalClose from '@/hooks/useModalClose'
+import { replaceHashTagWithLink } from '@/utils/whisperContext'
+import cn from './Post.module.scss'
 
 const Post = () => {
   useModalScrollRemove()
@@ -114,26 +114,7 @@ const Post = () => {
       return newFiles
     })
   }
-
-  const replaceHashTagWithLink = (text: string, hashTags?: string[]) => {
-    if (!hashTags || hashTags.length === 0) {
-      return [text]
-    }
-
-    const regex = new RegExp(`(${hashTags.join('|')})`, 'g')
-    const parts = text.split(regex)
-
-    return parts.map((part, index) =>
-      regex.test(part) ? (
-        <Link href="/" key={index} className={cn.hashTag}>
-          {part}
-        </Link>
-      ) : (
-        part
-      )
-    )
-  }
-  const renderedContent = replaceHashTagWithLink(content, hashArr)
+  const whisperContent = replaceHashTagWithLink(cn.hashTag, 'write', content, hashArr)
 
   return (
     <>
@@ -160,7 +141,7 @@ const Post = () => {
                   onChange={handleContent}
                   value={content}
                 />
-                <div className={cn.contentArea}>{renderedContent}</div>
+                <div className={cn.contentArea}>{whisperContent}</div>
               </div>
 
               {preview.length > 0 && (

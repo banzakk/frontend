@@ -25,7 +25,7 @@ export default function DetailWhisper({ whisperId }: { whisperId: string }) {
   useModalScrollRemove()
   const handleClose = useModalClose()
 
-  const { data: whisperData, isLoading } = useQuery<WhisperProps>({
+  const { data: whisperData } = useQuery<WhisperProps>({
     queryKey: ['whisper', 'detailWhisper'],
     queryFn: () => getDetailWhisper(whisperId),
   })
@@ -33,7 +33,7 @@ export default function DetailWhisper({ whisperId }: { whisperId: string }) {
   const { nickName, imageUrl, content, hashTag, isMyWhisper, comments, liked } =
     whisperData || {}
 
-  const whisperContent = replaceHashTagWithLink(cn.hsahTag, content, hashTag)
+  const whisperContent = replaceHashTagWithLink(cn.hashTag, 'get', content, hashTag)
 
   const whisperLink = `${window.location.host}/whisper?id=${whisperId}`
 

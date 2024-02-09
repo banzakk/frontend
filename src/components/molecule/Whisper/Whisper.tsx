@@ -17,9 +17,7 @@ import LikeButton from '@/components/molecule/LikeButton/LikeButton'
 import ShareButton from '@/components/molecule/ShareButton/ShareButton'
 import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
-import {
-  replaceHashTagWithLink,
-} from '@/utils/whisperContext'
+import { replaceHashTagWithLink } from '@/utils/whisperContext'
 import { deleteWhisper } from '@/services/whisper'
 
 export default function Whisper(whisper: WhisperProps) {
@@ -38,7 +36,12 @@ export default function Whisper(whisper: WhisperProps) {
     isMyWhisper,
   } = whisper
 
-  const whisperContent = replaceHashTagWithLink(cn.hashTag, content, hashTag)
+  const whisperContent = replaceHashTagWithLink(
+    cn.hashTag,
+    'get',
+    content,
+    hashTag
+  )
 
   const queryClient = useQueryClient()
   const mutation = useMutation({

@@ -4,6 +4,7 @@ import React from 'react'
 // 해시태그 처리
 export const replaceHashTagWithLink = (
   className: string,
+  regexType: string,
   text?: string,
   hashTags?: string[]
 ) => {
@@ -15,10 +16,13 @@ export const replaceHashTagWithLink = (
     return null
   }
 
-  const regex = new RegExp(
-    `(${hashTags.map((tag) => `#${tag}`).join('|')})`,
-    'g'
-  )
+  let regex = new RegExp('')
+  if (regexType === 'get') {
+    regex = new RegExp(`(${hashTags.map((tag) => `#${tag}`).join('|')})`, 'g')
+  } else if (regexType === 'write') {
+    regex = new RegExp(`(${hashTags?.join('|')})`, 'g')
+  }
+
   const parts = text.split(regex)
 
   return parts.map((part, index) =>
