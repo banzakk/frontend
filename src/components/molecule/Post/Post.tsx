@@ -4,7 +4,6 @@ import {
   ChangeEventHandler,
   FormEvent,
   MouseEventHandler,
-  useEffect,
   useState,
 } from 'react'
 import { useMutation } from '@tanstack/react-query'
@@ -16,17 +15,10 @@ import { Button } from '@/components/ui/button'
 import cn from './Post.module.scss'
 import { axiosInstance } from '@/services'
 import Link from 'next/link'
+import useModalScrollRemove from '@/hooks/useModalScrollRemove'
 
 const Post = () => {
-  const [bodyOverflow, setBodyOverflow] = useState('hidden')
-
-  useEffect(() => {
-    document.body.style.overflow = bodyOverflow
-
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [bodyOverflow])
+  useModalScrollRemove()
 
   const [content, setContent] = useState('')
   const [hashArr, setHashArr] = useState<string[]>([])

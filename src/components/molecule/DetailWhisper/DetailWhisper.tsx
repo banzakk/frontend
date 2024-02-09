@@ -21,10 +21,12 @@ import Spinner from '@/components/atom/Spinner/Spinner'
 import { MouseEventHandler } from 'react'
 import { useRouter } from 'next/navigation'
 import ShareButton from '../ShareButton/ShareButton'
+import useModalScrollRemove from '@/hooks/useModalScrollRemove'
 
 export default function DetailWhisper({ whisperId }: { whisperId: string }) {
-  const router = useRouter()
+  useModalScrollRemove();
 
+  const router = useRouter()
   const { data: whisperData, isLoading } = useQuery<WhisperProps>({
     queryKey: ['whisper', 'detailWhisper'],
     queryFn: () => getDetailWhisper(whisperId),
