@@ -44,10 +44,7 @@ const Post = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (content.length === 0) {
-      alert('내용을 입력해주세요.')
-      return
-    } else if (files.length === 0) {
+    if (files.length === 0) {
       alert('사진을 첨부해주세요.')
       return
     }
@@ -141,7 +138,7 @@ const Post = () => {
   return (
     <>
       <div className={cn.modalBackground} onClick={handleClose}>
-        <div className={cn.postArea} onClick={handleModalClick}>
+        <div className={cn.postArea} onClick={(e) => e.stopPropagation()}>
           <form
             className={cn.form}
             onSubmit={handleSubmit}
