@@ -13,20 +13,19 @@ import {
 import Comment from '@/components/molecule/Comment/Comment'
 import LikeButton from '@/components/molecule/LikeButton/LikeButton'
 import DeleteButton from '@/components/molecule/DeleteButton/DeleteButton'
+import useModalScrollRemove from '@/hooks/useModalScrollRemove'
+import useModalClose from '@/hooks/useModalClose'
 import { WhisperProps } from '@/types'
 import UploadImg from '../UploadImg/UploadImg'
 import { replaceHashTagWithLink } from '@/utils/whisperContext'
-import cn from './DetailWhisper.module.scss'
 import Spinner from '@/components/atom/Spinner/Spinner'
-import { MouseEventHandler } from 'react'
-import { useRouter } from 'next/navigation'
 import ShareButton from '../ShareButton/ShareButton'
-import useModalScrollRemove from '@/hooks/useModalScrollRemove'
+import cn from './DetailWhisper.module.scss'
 
 export default function DetailWhisper({ whisperId }: { whisperId: string }) {
-  useModalScrollRemove();
+  useModalScrollRemove()
+  const handleClose = useModalClose()
 
-  const router = useRouter()
   const { data: whisperData, isLoading } = useQuery<WhisperProps>({
     queryKey: ['whisper', 'detailWhisper'],
     queryFn: () => getDetailWhisper(whisperId),
@@ -41,21 +40,11 @@ export default function DetailWhisper({ whisperId }: { whisperId: string }) {
 
   const whisperContent = replaceHashTagWithLink(cn.hsahTag, content, hashTag)
 
-  const handleClose: MouseEventHandler<
-    HTMLButtonElement | HTMLDivElement
-  > = () => {
-    router.back()
-  }
-
-  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-  }
-
   const whisperLink = `${window.location.host}/whisper?id=${whisperId}`
 
   return (
     <div className={cn.modalBackground} onClick={handleClose}>
-      <div className={cn.container} onClick={handleModalClick}>
+      <div className={cn.container} onClick={(e) => e.stopPropagation()}>
         <div className={cn.imageArea}>
           {imageUrl && (
             <Carousel PostImages={imageUrl} className={cn.imageArea} />

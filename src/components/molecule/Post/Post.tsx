@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  ChangeEventHandler,
-  FormEvent,
-  MouseEventHandler,
-  useState,
-} from 'react'
+import { ChangeEventHandler, FormEvent, useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import TextareaAutosize from 'react-textarea-autosize'
@@ -16,6 +11,7 @@ import cn from './Post.module.scss'
 import { axiosInstance } from '@/services'
 import Link from 'next/link'
 import useModalScrollRemove from '@/hooks/useModalScrollRemove'
+import useModalClose from '@/hooks/useModalClose'
 
 const Post = () => {
   useModalScrollRemove()
@@ -63,20 +59,7 @@ const Post = () => {
     mutation.mutate(formData)
   }
 
-  // 글쓰기 창 닫기
-  const handleClose: MouseEventHandler<HTMLButtonElement | HTMLDivElement> = (
-    e
-  ) => {
-    if (confirm('취소하시겠습니까?')) {
-      router.back()
-    } else {
-      return
-    }
-  }
-
-  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-  }
+  const handleClose = useModalClose()
 
   // 텍스트 내용
   const handleContent: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
