@@ -73,7 +73,11 @@ export default function DetailWhisper({ whisperId }: { whisperId: string }) {
                 <div className={cn.icon}>
                   <CommentIcon />
                 </div>
-                <LikeButton className={cn.icon} liked={liked} />
+                <LikeButton
+                  className={cn.icon}
+                  liked={liked}
+                  whisperId={Number(whisperId)}
+                />
                 <RepostIcon className={cn.icon} />
                 <ShareButton className={cn.icon} text={whisperLink} />
                 {isMyWhisper === 1 && <DeleteButton className={cn.icon} />}

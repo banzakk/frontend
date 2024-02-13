@@ -34,6 +34,7 @@ export default function Whisper(whisper: WhisperProps) {
     hashTag,
     comments,
     isMyWhisper,
+    liked,
   } = whisper
 
   const whisperContent = replaceHashTagWithLink(
@@ -66,7 +67,11 @@ export default function Whisper(whisper: WhisperProps) {
             <div onClick={(e) => handleComment(e)} className={cn.icon}>
               <CommentIcon />
             </div>
-            <LikeButton className={cn.icon} />
+            <LikeButton
+              className={cn.icon}
+              liked={liked}
+              whisperId={whisperId}
+            />
             <RepostIcon className={cn.icon} />
            <ShareButton className={cn.icon} text={whisperLink}/>
             {isMyWhisper === 1 && (

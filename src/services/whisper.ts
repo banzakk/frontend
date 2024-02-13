@@ -21,4 +21,17 @@ export async function getTimeLineWhispers(userId: string, pageParam? : number): 
 export async function getDetailWhisper(whisperId: string): Promise<WhisperProps> {
   const res: AxiosResponse<WhisperProps[]> = await axios.get(`/whispers/${whisperId}`)
   return res.data[0]
+}}
+
+export async function addLike(whisperId: string): Promise<String> {
+  const res: AxiosResponse<String> = await axios.post(
+    `/whispers/${whisperId}/like`
+  )
+  return res.data
+}
+export async function cancelLike(whisperId: string): Promise<String> {
+  const res: AxiosResponse<String> = await axios.delete(
+    `/whispers/${whisperId}/like`
+  )
+  return res.data
 }

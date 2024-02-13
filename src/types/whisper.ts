@@ -3,9 +3,10 @@ export type WhisperProps = {
   nickName: string
   imageUrl: string[]
   content: string
+  liked: number
+  hashTag: string[]
+  isMyWhisper: number
   comments?: CommentProps[]
-  hashTag?: string[]
-  isMyWhisper?: string
 }
 
 export type CommentProps = {
