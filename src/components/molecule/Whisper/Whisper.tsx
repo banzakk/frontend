@@ -1,25 +1,16 @@
-'use client'
-
-import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import Typography from '@/components/atom/Typography/Typography'
-import {
-  RepostIcon,
-  CommentIcon,
-  SendIcon,
-  DeleteIcon,
-} from '@/components/atom/svg'
 import Carousel from '../Carousel/Carousel'
+import Typography from '@/components/atom/Typography/Typography'
+import { RepostIcon, CommentIcon, SendIcon } from '@/components/atom/svg'
 import Comment from '@/components/molecule/Comment/Comment'
 import LikeButton from '@/components/molecule/LikeButton/LikeButton'
 import ShareButton from '@/components/molecule/ShareButton/ShareButton'
+import DeleteButton from '../DeleteButton/DeleteButton'
+import { replaceHashTagWithLink } from '@/utils/whisperContext'
 import useToggleModal from '@/hooks/useToggleModal'
 import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
-import { replaceHashTagWithLink } from '@/utils/whisperContext'
-import { deleteWhisper } from '@/services/whisper'
 
 export default function Whisper(whisper: WhisperProps) {
   const {
@@ -39,19 +30,6 @@ export default function Whisper(whisper: WhisperProps) {
     content,
     hashTag
   )
-
-  const queryClient = useQueryClient()
-  const mutation = useMutation({
-    mutationFn: (whisperId: string) => deleteWhisper(whisperId),
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ['whispers'] })
-    },
-  })
-
-  const handleDelete = () => {
-    mutation.mutate(whisperId.toString())
-  }
-
   const [isToggled, handleToggle] = useToggleModal()
   const whisperLink = `${window.location.host}/whisper?id=${whisperId}`
 
@@ -70,11 +48,9 @@ export default function Whisper(whisper: WhisperProps) {
               whisperId={whisperId}
             />
             <RepostIcon className={cn.icon} />
-           <ShareButton className={cn.icon} text={whisperLink}/>
+            <ShareButton className={cn.icon} text={whisperLink} />
             {isMyWhisper === 1 && (
-              <div onClick={handleDelete}>
-                <DeleteIcon width="15" height="21" className={cn.icon} />
-              </div>
+              <DeleteButton className={cn.icon} whisperId={whisperId} />
             )}
           </div>
         </div>

@@ -33,7 +33,12 @@ export default function DetailWhisper({ whisperId }: { whisperId: string }) {
   const { nickName, imageUrl, content, hashTag, isMyWhisper, comments, liked } =
     whisperData || {}
 
-  const whisperContent = replaceHashTagWithLink(cn.hashTag, 'get', content, hashTag)
+  const whisperContent = replaceHashTagWithLink(
+    cn.hashTag,
+    'get',
+    content,
+    hashTag
+  )
 
   const whisperLink = `${window.location.host}/whisper?id=${whisperId}`
 
@@ -80,7 +85,12 @@ export default function DetailWhisper({ whisperId }: { whisperId: string }) {
                 />
                 <RepostIcon className={cn.icon} />
                 <ShareButton className={cn.icon} text={whisperLink} />
-                {isMyWhisper === 1 && <DeleteButton className={cn.icon} />}
+                {isMyWhisper?.toString() === '1' && (
+                  <DeleteButton
+                    className={cn.icon}
+                    whisperId={Number(whisperId)}
+                  />
+                )}
               </div>
             </div>
             <div className={cn.commentContainer}>
