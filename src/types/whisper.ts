@@ -10,14 +10,14 @@ export type WhisperProps = {
 }
 
 export type CommentProps = {
-  commentId: number,
-  nickName: string,
-  profileUrl: string,
+  commentId: number
+  nickName: string
+  profileUrl: string
   content: string
   isMyComment?: string
 }
 
 export type TimelineData = {
-  currentPage: number;
-  data: WhisperProps[];
-};
+  currentPage: number
+  data: WhisperProps[]
+}
