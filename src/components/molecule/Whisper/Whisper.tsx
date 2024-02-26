@@ -15,17 +15,13 @@ import Carousel from '../Carousel/Carousel'
 import Comment from '@/components/molecule/Comment/Comment'
 import LikeButton from '@/components/molecule/LikeButton/LikeButton'
 import ShareButton from '@/components/molecule/ShareButton/ShareButton'
+import useToggleModal from '@/hooks/useToggleModal'
 import { WhisperProps } from '@/types'
 import cn from './Whisper.module.scss'
 import { replaceHashTagWithLink } from '@/utils/whisperContext'
 import { deleteWhisper } from '@/services/whisper'
 
 export default function Whisper(whisper: WhisperProps) {
-  const [isComment, setIsComment] = useState(false)
-  const handleComment = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-    setIsComment(!isComment)
-  }
   const {
     whisperId,
     nickName,
@@ -56,6 +52,7 @@ export default function Whisper(whisper: WhisperProps) {
     mutation.mutate(whisperId.toString())
   }
 
+  const [isToggled, handleToggle] = useToggleModal()
   const whisperLink = `${window.location.host}/whisper?id=${whisperId}`
 
   return (
@@ -64,7 +61,7 @@ export default function Whisper(whisper: WhisperProps) {
         <Carousel PostImages={imageUrl} className={cn.imageArea} />
         <div className={cn.actionContainer}>
           <div className={cn.actionGroup}>
-            <div onClick={(e) => handleComment(e)} className={cn.icon}>
+            <div onClick={(e) => handleToggle(e)} className={cn.icon}>
               <CommentIcon />
             </div>
             <LikeButton
@@ -117,7 +114,7 @@ export default function Whisper(whisper: WhisperProps) {
         </div>
       </div>
       <div className={cn.commentPostArea}>
-        {isComment && (
+        {isToggled && (
           <div className={cn.commentPost}>
             <input className={cn.commentInput} />
             <SendIcon />
