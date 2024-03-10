@@ -1,3 +1,4 @@
+import { getAccessTokenFromLocalStorage } from '@/utils'
 import {
   AxiosInstance,
   AxiosResponseHeaders,
@@ -5,7 +6,7 @@ import {
 } from 'axios'
 
 const getTokenFromLocalStorage = () => {
-  const accessToken = window.localStorage.getItem('accessToken')
+  const accessToken = getAccessTokenFromLocalStorage()
   return accessToken
 }
 

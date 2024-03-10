@@ -7,6 +7,7 @@ import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { postLogin } from '@/services'
 import { UserDto } from '@/types'
+import { setAccessTokenToLocalStorage } from '@/utils'
 import axios from 'axios'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
@@ -27,7 +28,7 @@ const LoginForm = (props: Props) => {
     try {
       const res = await postLogin(data)
       if (res.data) {
-        localStorage.setItem('accessToken', res.data.accessToken)
+        setAccessTokenToLocalStorage(res.data.accessToken)
         window.location.href = '/whispers'
       }
     } catch (err) {

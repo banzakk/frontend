@@ -1,3 +1,4 @@
+import { setAccessTokenToLocalStorage } from '@/utils'
 import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios'
 import {
   getAccessToken,
@@ -41,13 +42,14 @@ const responseInterceptor = (axiosInstance: AxiosInstance) => {
         try {
           const res = await getAccessToken(axiosInstance)
           if (res.data) {
-            localStorage.setItem('accessToken', res.data.accessToken)
+            setAccessTokenToLocalStorage(res.data.accessToken)
+            location.reload()
           } else {
-            localStorage.removeItem('accessToken')
+            localStorage.removeItem('token')
             window.location.href = '/'
           }
         } catch (err) {
-          localStorage.removeItem('accessToken')
+          localStorage.removeItem('token')
         } finally {
           isRefreshingToken = false
         }

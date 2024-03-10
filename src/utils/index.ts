@@ -78,3 +78,28 @@ export class FormErrorBuilder<T extends FieldValues> {
     return this.form.setError(this.type, { message: this.message })
   }
 }
+
+export const setAccessTokenToLocalStorage = (token: string) => {
+  const now = new Date()
+  const item = {
+    accessToken: token,
+    expiresIn: now.getTime() + 30 * 60000,
+  }
+  localStorage.setItem('token', JSON.stringify(item))
+}
+
+export const getAccessTokenFromLocalStorage = (key: string = 'token') => {
+  const tokenString = localStorage.getItem(key)
+  if (!tokenString) {
+    return null
+  }
+
+  const token = JSON.parse(tokenString)
+  const now = new Date()
+
+  if (now.getDate() > token.expiresIn) {
+    localStorage.removeItem(key)
+    return null
+  }
+  return token.accessToken
+}

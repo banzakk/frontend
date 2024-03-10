@@ -1,6 +1,7 @@
 'use client'
 
 import { axiosInstance } from '@/services'
+import { setAccessTokenToLocalStorage } from '@/utils'
 import { useEffect } from 'react'
 
 const UseSocialCheck = (query: string | null) => {
@@ -11,7 +12,7 @@ const UseSocialCheck = (query: string | null) => {
         .post('/users/refresh-token')
         .then((res) => {
           const accessToken = res.data.accessToken
-          window.localStorage.setItem('accessToken', accessToken)
+          setAccessTokenToLocalStorage(accessToken)
         })
         .catch((err) => console.error(err))
     }
